@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🌟 English Star – Learn & Speak!</title>
+<title>🌟 Learning Star – Learn & Speak!</title>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -120,6 +120,37 @@ body {
 /* full/short text toggling */
 .btn-short{display:none;}
 .btn-full{display:inline;}
+/* ===== SPEED SLIDER ===== */
+.slider-wrap{
+  display:flex;align-items:center;gap:6px;
+}
+.slider-icon{font-size:1.05rem;line-height:1;flex-shrink:0;}
+.speed-slider{
+  -webkit-appearance:none;appearance:none;
+  width:120px;height:4px;
+  background:rgba(255,255,255,0.22);
+  border-radius:4px;outline:none;cursor:pointer;
+  accent-color:#FFD700;
+}
+.speed-slider::-webkit-slider-thumb{
+  -webkit-appearance:none;width:20px;height:20px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#FFD700,#FF8C00);
+  box-shadow:0 2px 8px rgba(255,180,0,0.55);
+  cursor:pointer;
+  transition:transform 0.15s;
+}
+.speed-slider::-webkit-slider-thumb:active{transform:scale(1.2);}
+.speed-slider::-moz-range-thumb{
+  width:20px;height:20px;border:none;border-radius:50%;
+  background:linear-gradient(135deg,#FFD700,#FF8C00);
+  box-shadow:0 2px 8px rgba(255,180,0,0.55);
+  cursor:pointer;
+}
+.speed-label{
+  font-family:'Baloo 2',cursive;font-weight:800;font-size:0.78rem;
+  color:#FFD700;min-width:58px;white-space:nowrap;
+}
 /* sidebar hamburger */
 .sidebar-toggle {
   display:none;flex-shrink:0;
@@ -197,16 +228,20 @@ body {
   .sidebar-toggle{display:flex;}
   .btn-full{display:none;}
   .btn-short{display:inline;}
-  .ctrl-label{min-width:auto;font-size:0.7rem;}
+  .ctrl-label{display:none;}
+  .speed-label{min-width:auto;}
+  .speed-slider{width:90px;}
   .tabs-wrapper{
     position:fixed;
-    top:var(--topbar-h);left:-210px;
+    top:var(--topbar-h);left:0;
     width:200px;
     height:calc(100vh - var(--topbar-h));
-    transition:left 0.25s ease;
-    z-index:16;
+    transform:translateX(-100%);
+    transition:transform 0.25s ease;
+    z-index:200;
   }
-  .tabs-wrapper.open{left:0;}
+  .tabs-wrapper.open{transform:translateX(0);left:0;}
+  .sidebar-overlay{z-index:199;}
   .search-box{max-width:160px;padding:6px 12px;font-size:0.82rem;}
   .brand-sub{display:none;}
 }
@@ -415,9 +450,12 @@ body {
   <div class="topbar-filters">
     <div class="filter-row">
       <span class="ctrl-label">🐢 Speed</span>
-      <button class="speed-btn sel" data-rate="0.55"><span class="btn-full">Very Slow</span><span class="btn-short">V.Slow</span></button>
-      <button class="speed-btn" data-rate="0.68"><span class="btn-full">Slow</span><span class="btn-short">Slow</span></button>
-      <button class="speed-btn" data-rate="0.82"><span class="btn-full">Normal</span><span class="btn-short">Norm</span></button>
+      <div class="slider-wrap">
+        <span class="slider-icon">🐢</span>
+        <input type="range" id="speedSlider" class="speed-slider" min="0" max="2" step="1" value="0">
+        <span class="slider-icon">🐇</span>
+      </div>
+      <span class="speed-label" id="speedLabel">Very Slow</span>
     </div>
     <div class="filter-row">
       <span class="ctrl-label">🎙️ Voice</span>
@@ -1539,14 +1577,14 @@ let autoPlayBtn=null;
 })();
 
 // ============================================================
-//  SPEED BUTTONS
+//  SPEED SLIDER
 // ============================================================
-document.querySelectorAll('[data-rate]').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('[data-rate]').forEach(b=>b.classList.remove('sel'));
-    btn.classList.add('sel');
-    speechRate=parseFloat(btn.dataset.rate);
-  });
+const SPEED_RATES=[0.55,0.68,0.82];
+const SPEED_NAMES=['Very Slow','Slow','Normal'];
+document.getElementById('speedSlider').addEventListener('input',function(){
+  const i=parseInt(this.value);
+  speechRate=SPEED_RATES[i];
+  document.getElementById('speedLabel').textContent=SPEED_NAMES[i];
 });
 
 // ============================================================
