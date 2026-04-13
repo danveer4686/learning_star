@@ -1,0 +1,1713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌟 English Star – Learn & Speak!</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0d1b4b;
+  --bg2: #162363;
+  --gold: #FFD700;
+  --gold2: #FFA500;
+  --white: #ffffff;
+  --radius-lg: 30px;
+  --radius-md: 20px;
+  --shadow: 0 8px 32px rgba(0,0,0,0.35);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+
+body {
+  font-family:'Nunito',sans-serif;
+  background: radial-gradient(ellipse at top, #1a2f80 0%, #0a1235 60%, #060d24 100%);
+  min-height:100vh;
+  color:var(--white);
+  overflow-x:hidden;
+}
+
+/* ===== STARS BG ===== */
+#starfield {
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  pointer-events:none;z-index:0;overflow:hidden;
+}
+.star-dot {
+  position:absolute;border-radius:50%;background:white;
+  animation:twinkle ease-in-out infinite alternate;
+}
+@keyframes twinkle{from{opacity:.2;transform:scale(1);}to{opacity:1;transform:scale(1.5);}}
+
+/* ===== HEADER ===== */
+header {
+  position:relative;z-index:2;
+  text-align:center;
+  padding:30px 16px 12px;
+}
+.header-title {
+  font-family:'Baloo 2',cursive;
+  font-size:clamp(2rem,6vw,3.8rem);
+  font-weight:800;
+  background:linear-gradient(135deg,#FFD700,#FF8C00,#FFD700);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  text-shadow:none;
+  filter:drop-shadow(0 0 18px rgba(255,200,0,0.5));
+  line-height:1.1;
+}
+.header-sub {
+  font-size:1.05rem;
+  color:#aac4ff;
+  margin-top:6px;
+  font-weight:700;
+}
+
+/* ===== SPEED CONTROL ===== */
+.speed-row {
+  position:relative;z-index:2;
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  padding:10px 16px;
+  flex-wrap:wrap;
+}
+.speed-label{font-size:0.95rem;font-weight:800;color:#aac4ff;}
+.speed-btn {
+  font-family:'Baloo 2',cursive;font-weight:700;font-size:0.9rem;
+  border:2px solid rgba(255,255,255,0.25);
+  background:rgba(255,255,255,0.08);
+  color:white;border-radius:50px;padding:6px 16px;cursor:pointer;
+  transition:all 0.15s;
+}
+.speed-btn.sel {
+  background:linear-gradient(135deg,#FFD700,#FF8C00);
+  border-color:transparent;color:#000;
+  box-shadow:0 4px 16px rgba(255,180,0,0.45);
+}
+.speed-btn:hover:not(.sel){background:rgba(255,255,255,0.15);}
+
+/* ===== SEARCH BAR ===== */
+.search-row {
+  position:relative;z-index:2;
+  display:flex;justify-content:center;
+  padding:6px 16px 12px;
+}
+.search-box {
+  width:100%;max-width:500px;
+  background:rgba(255,255,255,0.1);
+  border:2px solid rgba(255,255,255,0.2);
+  border-radius:50px;
+  padding:10px 20px;
+  font-family:'Nunito',sans-serif;font-size:1rem;font-weight:700;
+  color:white;outline:none;
+  transition:border 0.2s,background 0.2s;
+}
+.search-box::placeholder{color:rgba(255,255,255,0.45);}
+.search-box:focus{border-color:#FFD700;background:rgba(255,255,255,0.15);}
+
+/* ===== TABS STRIP ===== */
+.tabs-wrapper {
+  position:sticky;top:0;z-index:10;
+  background:linear-gradient(180deg,#0d1b4b 85%,transparent 100%);
+  padding:10px 12px 8px;
+}
+.tabs-scroll {
+  display:flex;gap:8px;overflow-x:auto;
+  padding-bottom:4px;
+  scrollbar-width:thin;scrollbar-color:rgba(255,255,255,0.2) transparent;
+}
+.tabs-scroll::-webkit-scrollbar{height:4px;}
+.tabs-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.2);border-radius:10px;}
+.tab-btn {
+  flex-shrink:0;
+  font-family:'Baloo 2',cursive;font-weight:700;font-size:0.92rem;
+  border:none;border-radius:50px;
+  padding:8px 18px;cursor:pointer;
+  transition:transform 0.15s,box-shadow 0.15s,background 0.15s;
+  white-space:nowrap;
+  color:rgba(255,255,255,0.7);
+  background:rgba(255,255,255,0.1);
+  border:1.5px solid rgba(255,255,255,0.15);
+}
+.tab-btn:hover{transform:translateY(-2px);background:rgba(255,255,255,0.18);}
+.tab-btn.active{
+  color:#000;font-weight:800;
+  transform:translateY(-3px) scale(1.06);
+  box-shadow:0 6px 20px rgba(0,0,0,0.3);
+  border-color:transparent;
+}
+
+/* ===== STAGE ===== */
+.stage {
+  position:relative;z-index:1;
+  max-width:760px;margin:16px auto 100px;
+  padding:0 14px;
+}
+
+.cat-title {
+  font-family:'Baloo 2',cursive;font-weight:800;
+  font-size:clamp(1.6rem,5vw,2.4rem);
+  text-align:center;margin-bottom:20px;
+  filter:drop-shadow(0 0 12px rgba(255,220,0,0.4));
+}
+
+/* ===== SENTENCE CARDS ===== */
+.sentence-grid{display:flex;flex-direction:column;gap:12px;margin-bottom:32px;}
+
+.group-label {
+  font-family:'Baloo 2',cursive;font-size:0.8rem;font-weight:800;
+  letter-spacing:1.5px;text-transform:uppercase;
+  color:rgba(255,255,255,0.45);
+  margin:18px 0 6px 6px;
+}
+
+.sentence-card {
+  display:flex;align-items:center;gap:14px;
+  padding:16px 18px;
+  border-radius:22px;
+  cursor:pointer;
+  transition:transform 0.18s,box-shadow 0.18s;
+  animation:cardIn 0.4s ease both;
+  border:1.5px solid rgba(255,255,255,0.12);
+  position:relative;overflow:hidden;
+}
+.sentence-card::before {
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02));
+  pointer-events:none;
+}
+.sentence-card:hover{transform:translateY(-3px) scale(1.015);box-shadow:0 14px 40px rgba(0,0,0,0.4);}
+.sentence-card:active{transform:scale(0.98);}
+.sentence-card.played::after {
+  content:'✓';
+  position:absolute;top:10px;right:62px;
+  font-size:1rem;font-weight:900;color:rgba(255,255,255,0.4);
+}
+
+@keyframes cardIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+
+.card-emoji {
+  font-size:2.8rem;flex-shrink:0;
+  width:56px;text-align:center;
+  filter:drop-shadow(0 2px 6px rgba(0,0,0,0.4));
+  transition:transform 0.3s;
+}
+.sentence-card:hover .card-emoji{transform:scale(1.2) rotate(-5deg);}
+
+.card-body{flex:1;min-width:0;}
+.card-sentence {
+  font-family:'Baloo 2',cursive;font-weight:800;
+  font-size:clamp(1.2rem,3.5vw,1.55rem);
+  color:#fff;line-height:1.25;
+  text-shadow:0 1px 4px rgba(0,0,0,0.4);
+}
+.card-pronun {
+  font-size:0.82rem;font-weight:700;
+  color:rgba(200,220,255,0.7);
+  margin-top:3px;font-style:italic;
+  letter-spacing:0.3px;
+}
+
+.speak-btn {
+  width:52px;height:52px;flex-shrink:0;
+  border-radius:50%;border:none;cursor:pointer;
+  font-size:1.5rem;
+  display:flex;align-items:center;justify-content:center;
+  transition:transform 0.15s,box-shadow 0.15s;
+  box-shadow:0 4px 16px rgba(0,0,0,0.3);
+  position:relative;z-index:1;
+}
+.speak-btn:hover{transform:scale(1.18);}
+.speak-btn:active{transform:scale(0.92);}
+.speak-btn.speaking{animation:speakPulse 0.5s ease infinite alternate;}
+@keyframes speakPulse{from{transform:scale(1);}to{transform:scale(1.28);box-shadow:0 0 0 8px rgba(255,200,0,0.25);}}
+
+/* ===== STAR BAR ===== */
+.star-bar {
+  position:fixed;bottom:16px;left:50%;transform:translateX(-50%);
+  z-index:100;
+  background:linear-gradient(135deg,#1a2060,#0f1540);
+  border:2px solid rgba(255,215,0,0.5);
+  border-radius:50px;
+  padding:10px 24px;
+  display:flex;align-items:center;gap:12px;
+  box-shadow:0 8px 32px rgba(0,0,0,0.5);
+  font-family:'Baloo 2',cursive;font-weight:800;
+}
+.star-bar-label{font-size:0.95rem;color:#aac4ff;}
+.star-bar-count{font-size:1.5rem;color:#FFD700;text-shadow:0 0 12px rgba(255,200,0,0.6);}
+.star-bar-progress {
+  display:flex;gap:4px;
+}
+.star-pip {
+  width:10px;height:10px;border-radius:50%;
+  background:rgba(255,255,255,0.15);transition:background 0.3s,transform 0.3s;
+}
+.star-pip.lit{background:#FFD700;transform:scale(1.2);box-shadow:0 0 6px rgba(255,200,0,0.8);}
+
+/* ===== CONFETTI ===== */
+.confetti-piece {
+  position:fixed;pointer-events:none;z-index:300;
+  font-size:1.8rem;
+  animation:confettiFly 1.4s ease-out forwards;
+}
+@keyframes confettiFly {
+  0%{opacity:1;transform:translateY(0) rotate(0deg) scale(1);}
+  100%{opacity:0;transform:translateY(-220px) rotate(60deg) scale(0.5);}
+}
+
+/* ===== BRAVO OVERLAY ===== */
+.bravo-overlay {
+  position:fixed;inset:0;z-index:200;
+  display:flex;align-items:center;justify-content:center;
+  pointer-events:none;
+}
+.bravo-box {
+  font-family:'Baloo 2',cursive;font-weight:800;
+  font-size:clamp(2.5rem,8vw,5rem);
+  text-align:center;
+  background:linear-gradient(135deg,#FFD700,#FF8C00);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  filter:drop-shadow(0 0 30px rgba(255,160,0,0.8));
+  animation:bravoAnim 2.5s ease-out forwards;
+}
+@keyframes bravoAnim {
+  0%{opacity:0;transform:scale(0.3) rotate(-10deg);}
+  15%{opacity:1;transform:scale(1.15) rotate(3deg);}
+  30%{transform:scale(1) rotate(0deg);}
+  70%{opacity:1;transform:scale(1);}
+  100%{opacity:0;transform:scale(1.2);}
+}
+
+/* ===== SEARCH RESULTS ===== */
+.search-results-title {
+  font-family:'Baloo 2',cursive;font-weight:800;
+  font-size:1.3rem;color:#aac4ff;
+  text-align:center;margin-bottom:16px;
+}
+
+/* ===== SCROLLTOP ===== */
+.scroll-top {
+  position:fixed;right:20px;bottom:80px;z-index:99;
+  width:44px;height:44px;border-radius:50%;border:none;
+  background:rgba(255,215,0,0.85);color:#000;
+  font-size:1.3rem;cursor:pointer;
+  box-shadow:0 4px 16px rgba(0,0,0,0.4);
+  display:none;align-items:center;justify-content:center;
+  transition:opacity 0.2s;
+}
+.scroll-top.visible{display:flex;}
+</style>
+</head>
+<body>
+
+<div id="starfield"></div>
+
+<header>
+  <div class="header-title">🌟 English Star 🌟</div>
+  <div class="header-sub">Tap any card and listen — then say it loudly! 🎤</div>
+</header>
+
+<!-- Speed selector -->
+<div class="speed-row">
+  <span class="speed-label">🐢 Speed:</span>
+  <button class="speed-btn sel" data-rate="0.55">Very Slow</button>
+  <button class="speed-btn" data-rate="0.68">Slow</button>
+  <button class="speed-btn" data-rate="0.82">Normal</button>
+</div>
+
+<!-- Voice selector -->
+<div class="speed-row">
+  <span class="speed-label">🎙️ Voice:</span>
+  <button class="speed-btn sel" data-gender="female">👩 Female</button>
+  <button class="speed-btn" data-gender="male">👨 Male</button>
+</div>
+
+<!-- Search -->
+<div class="search-row">
+  <input class="search-box" id="searchBox" type="text" placeholder="🔍 Search sentences...">
+</div>
+
+<!-- Tabs -->
+<div class="tabs-wrapper">
+  <div class="tabs-scroll" id="tabsScroll"></div>
+</div>
+
+<!-- Stage -->
+<div class="stage" id="stage"></div>
+
+<!-- Star bar -->
+<div class="star-bar">
+  <span class="star-bar-label">⭐ Stars</span>
+  <span class="star-bar-count" id="starCount">0</span>
+  <div class="star-bar-progress" id="starPips"></div>
+</div>
+
+<!-- Scroll top -->
+<button class="scroll-top" id="scrollTop">↑</button>
+
+<script>
+// ============================================================
+//  DATA — 50 categories, 700+ sentences
+// ============================================================
+const CATS = [
+{id:0,label:"🙋 I Have",color:"#FF6347",bg:"rgba(255,99,71,0.18)",groups:[
+  {h:"Things at home",s:[
+    {t:"I have a ball.",e:"⚽",p:"I · hav · uh · bawl"},
+    {t:"I have a toy.",e:"🧸",p:"I · hav · uh · toy"},
+    {t:"I have a bag.",e:"🎒",p:"I · hav · uh · bag"},
+    {t:"I have a book.",e:"📚",p:"I · hav · uh · book"},
+    {t:"I have a pencil.",e:"✏️",p:"I · hav · uh · pen-sul"},
+    {t:"I have a cup.",e:"🥤",p:"I · hav · uh · kup"},
+    {t:"I have a bat.",e:"🏏",p:"I · hav · uh · bat"},
+    {t:"I have a kite.",e:"🪁",p:"I · hav · uh · kyte"},
+    {t:"I have a box.",e:"📦",p:"I · hav · uh · boks"},
+    {t:"I have a doll.",e:"🪆",p:"I · hav · uh · dol"},
+    {t:"I have a car toy.",e:"🚗",p:"I · hav · uh · kar · toy"},
+    {t:"I have a crayon.",e:"🖍️",p:"I · hav · uh · kray-on"},
+    {t:"I have a balloon.",e:"🎈",p:"I · hav · uh · buh-loon"},
+    {t:"I have a bottle.",e:"🍼",p:"I · hav · uh · bot-ul"},
+  ]},
+]},
+
+{id:1,label:"🏃 I Want",color:"#32CD32",bg:"rgba(50,205,50,0.15)",groups:[
+  {h:"Activities",s:[
+    {t:"I want to play.",e:"🎮",p:"I · wont · too · play"},
+    {t:"I want to eat.",e:"🍕",p:"I · wont · too · eet"},
+    {t:"I want to run.",e:"🏃",p:"I · wont · too · run"},
+    {t:"I want to dance.",e:"💃",p:"I · wont · too · dans"},
+    {t:"I want to sleep.",e:"😴",p:"I · wont · too · sleep"},
+    {t:"I want to swim.",e:"🏊",p:"I · wont · too · swim"},
+    {t:"I want to jump.",e:"🦘",p:"I · wont · too · jump"},
+    {t:"I want to draw.",e:"🎨",p:"I · wont · too · draw"},
+    {t:"I want to sing.",e:"🎵",p:"I · wont · too · sing"},
+    {t:"I want to read.",e:"📖",p:"I · wont · too · reed"},
+    {t:"I want to ride.",e:"🚲",p:"I · wont · too · ryde"},
+    {t:"I want to drink water.",e:"💧",p:"I · wont · too · drink · waw-ter"},
+    {t:"I want to go outside.",e:"🌳",p:"I · wont · too · go · owt-syde"},
+    {t:"I want to watch TV.",e:"📺",p:"I · wont · too · woch · tee-vee"},
+  ]},
+]},
+
+{id:2,label:"❤️ I Like",color:"#FF69B4",bg:"rgba(255,105,180,0.15)",groups:[
+  {h:"Food I like",s:[
+    {t:"I like mango.",e:"🥭",p:"I · lyk · mang-go"},
+    {t:"I like milk.",e:"🥛",p:"I · lyk · milk"},
+    {t:"I like cake.",e:"🎂",p:"I · lyk · kayk"},
+    {t:"I like rice.",e:"🍚",p:"I · lyk · rys"},
+    {t:"I like roti.",e:"🫓",p:"I · lyk · ro-tee"},
+    {t:"I like chocolate.",e:"🍫",p:"I · lyk · chok-let"},
+    {t:"I like ice cream.",e:"🍦",p:"I · lyk · ys · kreem"},
+    {t:"I like biscuits.",e:"🍪",p:"I · lyk · bis-kits"},
+    {t:"I like apples.",e:"🍎",p:"I · lyk · ap-ulz"},
+    {t:"I like bananas.",e:"🍌",p:"I · lyk · buh-nah-nuhz"},
+  ]},
+  {h:"Things I like",s:[
+    {t:"I like dogs.",e:"🐶",p:"I · lyk · dogz"},
+    {t:"I like cars.",e:"🚗",p:"I · lyk · karz"},
+    {t:"I like birds.",e:"🐦",p:"I · lyk · berdz"},
+    {t:"I like colours.",e:"🌈",p:"I · lyk · kul-erz"},
+    {t:"I like stories.",e:"📖",p:"I · lyk · sto-reez"},
+  ]},
+]},
+
+{id:3,label:"😊 Feelings",color:"#FFD700",bg:"rgba(255,215,0,0.15)",groups:[
+  {h:"How I feel",s:[
+    {t:"I am happy.",e:"😄",p:"I · am · hap-ee"},
+    {t:"I am hungry.",e:"🤤",p:"I · am · hung-gree"},
+    {t:"I am sleepy.",e:"😴",p:"I · am · sleep-ee"},
+    {t:"I am thirsty.",e:"🥤",p:"I · am · thers-tee"},
+    {t:"I am good.",e:"👍",p:"I · am · good"},
+    {t:"I am sad.",e:"😢",p:"I · am · sad"},
+    {t:"I am scared.",e:"😨",p:"I · am · skaird"},
+    {t:"I am excited.",e:"🤩",p:"I · am · ek-sy-ted"},
+    {t:"I am tired.",e:"😪",p:"I · am · tyrd"},
+    {t:"I am angry.",e:"😠",p:"I · am · ang-gree"},
+    {t:"I am fine.",e:"😊",p:"I · am · fyn"},
+    {t:"I am sick.",e:"🤒",p:"I · am · sik"},
+    {t:"I am cold.",e:"🥶",p:"I · am · kold"},
+    {t:"I am hot.",e:"🥵",p:"I · am · hot"},
+  ]},
+]},
+
+{id:4,label:"🌞 Greetings",color:"#FFA500",bg:"rgba(255,165,0,0.15)",groups:[
+  {h:"Hello and Goodbye",s:[
+    {t:"Good morning!",e:"🌅",p:"good · mor-ning"},
+    {t:"Good afternoon!",e:"☀️",p:"good · af-ter-noon"},
+    {t:"Good evening!",e:"🌆",p:"good · eev-ning"},
+    {t:"Good night!",e:"🌙",p:"good · nyt"},
+    {t:"Hello!",e:"👋",p:"heh-lo"},
+    {t:"Hi there!",e:"😃",p:"hy · thair"},
+    {t:"Bye bye!",e:"👋",p:"by · by"},
+    {t:"See you later!",e:"✌️",p:"see · yoo · lay-ter"},
+    {t:"Take care!",e:"🤗",p:"tayk · kair"},
+  ]},
+  {h:"Polite words",s:[
+    {t:"Thank you!",e:"🙏",p:"thank · yoo"},
+    {t:"Thank you very much!",e:"🙏",p:"thank · yoo · ver-ee · much"},
+    {t:"You are welcome!",e:"😊",p:"yoo · ar · wel-kum"},
+    {t:"Please help me.",e:"🤝",p:"pleez · help · mee"},
+    {t:"Sorry!",e:"😔",p:"sor-ee"},
+    {t:"Excuse me.",e:"🙋",p:"eks-kyooz · mee"},
+    {t:"No problem!",e:"👌",p:"no · prob-lem"},
+  ]},
+]},
+
+{id:5,label:"📍 This Is",color:"#9B59B6",bg:"rgba(155,89,182,0.18)",groups:[
+  {h:"People",s:[
+    {t:"This is my mama.",e:"👩",p:"dis · iz · my · mah-mah"},
+    {t:"This is my papa.",e:"👨",p:"dis · iz · my · pah-pah"},
+    {t:"This is my dadi.",e:"👵",p:"dis · iz · my · dah-dee"},
+    {t:"This is my dada.",e:"👴",p:"dis · iz · my · dah-dah"},
+    {t:"This is my nani.",e:"👵",p:"dis · iz · my · nah-nee"},
+    {t:"This is my nana.",e:"👴",p:"dis · iz · my · nah-nah"},
+    {t:"This is my sister.",e:"👧",p:"dis · iz · my · sis-ter"},
+    {t:"This is my brother.",e:"👦",p:"dis · iz · my · bru-ther"},
+    {t:"This is my friend.",e:"🤝",p:"dis · iz · my · frend"},
+    {t:"This is my teacher.",e:"👩‍🏫",p:"dis · iz · my · tee-cher"},
+  ]},
+  {h:"Things & Places",s:[
+    {t:"This is my home.",e:"🏠",p:"dis · iz · my · hohm"},
+    {t:"This is a cat.",e:"🐱",p:"dis · iz · uh · kat"},
+    {t:"This is a bird.",e:"🐦",p:"dis · iz · uh · berd"},
+    {t:"This is a tree.",e:"🌳",p:"dis · iz · uh · tree"},
+    {t:"This is a flower.",e:"🌸",p:"dis · iz · uh · flow-er"},
+  ]},
+]},
+
+{id:6,label:"🐾 Animals",color:"#8B4513",bg:"rgba(139,69,19,0.2)",groups:[
+  {h:"Say the animal name",s:[
+    {t:"I see a dog.",e:"🐶",p:"I · see · uh · dog"},
+    {t:"I see a cat.",e:"🐱",p:"I · see · uh · kat"},
+    {t:"I see a cow.",e:"🐄",p:"I · see · uh · kow"},
+    {t:"I see a bird.",e:"🐦",p:"I · see · uh · berd"},
+    {t:"I see a fish.",e:"🐟",p:"I · see · uh · fish"},
+    {t:"I see a lion.",e:"🦁",p:"I · see · uh · ly-un"},
+    {t:"I see an elephant.",e:"🐘",p:"I · see · un · el-uh-funt"},
+    {t:"I see a monkey.",e:"🐒",p:"I · see · uh · mun-kee"},
+    {t:"I see a snake.",e:"🐍",p:"I · see · uh · snayk"},
+    {t:"I see a rabbit.",e:"🐰",p:"I · see · uh · rab-it"},
+    {t:"I see a horse.",e:"🐴",p:"I · see · uh · hors"},
+    {t:"I see a butterfly.",e:"🦋",p:"I · see · uh · but-er-fly"},
+    {t:"I see a frog.",e:"🐸",p:"I · see · uh · frog"},
+    {t:"I see a duck.",e:"🦆",p:"I · see · uh · duk"},
+    {t:"I see a bear.",e:"🐻",p:"I · see · uh · bair"},
+  ]},
+]},
+
+{id:7,label:"🍎 Food & Drinks",color:"#E74C3C",bg:"rgba(231,76,60,0.17)",groups:[
+  {h:"I eat…",s:[
+    {t:"I eat rice.",e:"🍚",p:"I · eet · rys"},
+    {t:"I eat roti.",e:"🫓",p:"I · eet · ro-tee"},
+    {t:"I eat dal.",e:"🍲",p:"I · eet · daal"},
+    {t:"I eat an egg.",e:"🥚",p:"I · eet · un · eg"},
+    {t:"I eat bread.",e:"🍞",p:"I · eet · bred"},
+    {t:"I eat noodles.",e:"🍜",p:"I · eet · noo-dulz"},
+    {t:"I eat a mango.",e:"🥭",p:"I · eet · uh · mang-go"},
+    {t:"I eat a banana.",e:"🍌",p:"I · eet · uh · buh-nah-nuh"},
+    {t:"I eat an apple.",e:"🍎",p:"I · eet · un · ap-ul"},
+    {t:"I eat chocolate.",e:"🍫",p:"I · eet · chok-let"},
+  ]},
+  {h:"I drink…",s:[
+    {t:"I drink water.",e:"💧",p:"I · drink · waw-ter"},
+    {t:"I drink milk.",e:"🥛",p:"I · drink · milk"},
+    {t:"I drink juice.",e:"🧃",p:"I · drink · joos"},
+    {t:"I drink lassi.",e:"🥤",p:"I · drink · lus-see"},
+  ]},
+]},
+
+{id:8,label:"🎨 Colours",color:"#E91E63",bg:"rgba(233,30,99,0.15)",groups:[
+  {h:"Colour names",s:[
+    {t:"Red is like fire.",e:"🔴",p:"red · iz · lyk · fyr"},
+    {t:"Blue is like the sky.",e:"🔵",p:"bloo · iz · lyk · thee · sky"},
+    {t:"Yellow is like the sun.",e:"🌞",p:"yel-oh · iz · lyk · thee · sun"},
+    {t:"Green is like grass.",e:"💚",p:"green · iz · lyk · gras"},
+    {t:"Orange is like a mango.",e:"🟠",p:"or-inj · iz · lyk · uh · mang-go"},
+    {t:"Pink is like a flower.",e:"🌸",p:"pink · iz · lyk · uh · flow-er"},
+    {t:"White is like milk.",e:"⚪",p:"wyt · iz · lyk · milk"},
+    {t:"Black is like night.",e:"⚫",p:"blak · iz · lyk · nyt"},
+    {t:"Brown is like mud.",e:"🟤",p:"brown · iz · lyk · mud"},
+    {t:"Purple is like a grape.",e:"🍇",p:"pur-pul · iz · lyk · uh · grayp"},
+  ]},
+  {h:"I see colours",s:[
+    {t:"I see the colour red.",e:"❤️",p:"I · see · thee · kul-er · red"},
+    {t:"I see the colour blue.",e:"💙",p:"I · see · thee · kul-er · bloo"},
+    {t:"I see the colour green.",e:"💚",p:"I · see · thee · kul-er · green"},
+    {t:"I see the colour yellow.",e:"💛",p:"I · see · thee · kul-er · yel-oh"},
+  ]},
+]},
+
+{id:9,label:"🔢 Numbers",color:"#2196F3",bg:"rgba(33,150,243,0.15)",groups:[
+  {h:"Count with me",s:[
+    {t:"One big elephant.",e:"1️⃣🐘",p:"wun · big · el-uh-funt"},
+    {t:"Two little birds.",e:"2️⃣🐦",p:"too · lit-ul · berdz"},
+    {t:"Three red balls.",e:"3️⃣⚽",p:"three · red · bawlz"},
+    {t:"Four yellow flowers.",e:"4️⃣🌸",p:"for · yel-oh · flow-erz"},
+    {t:"Five green frogs.",e:"5️⃣🐸",p:"fyv · green · frogz"},
+    {t:"Six blue stars.",e:"6️⃣⭐",p:"siks · bloo · starz"},
+    {t:"Seven orange mangoes.",e:"7️⃣🥭",p:"sev-un · or-inj · mang-gohz"},
+    {t:"Eight round cookies.",e:"8️⃣🍪",p:"ayt · rownd · kook-eez"},
+    {t:"Nine white clouds.",e:"9️⃣☁️",p:"nyn · wyt · klowdz"},
+    {t:"Ten big trees.",e:"🔟🌳",p:"ten · big · treez"},
+  ]},
+]},
+
+{id:10,label:"📅 Days",color:"#009688",bg:"rgba(0,150,136,0.17)",groups:[
+  {h:"Days of the week",s:[
+    {t:"Today is Monday.",e:"📅",p:"too-day · iz · mun-day"},
+    {t:"Today is Tuesday.",e:"📅",p:"too-day · iz · tyooz-day"},
+    {t:"Today is Wednesday.",e:"📅",p:"too-day · iz · wenz-day"},
+    {t:"Today is Thursday.",e:"📅",p:"too-day · iz · therz-day"},
+    {t:"Today is Friday.",e:"📅",p:"too-day · iz · fry-day"},
+    {t:"Today is Saturday.",e:"📅",p:"too-day · iz · sat-er-day"},
+    {t:"Today is Sunday.",e:"📅",p:"too-day · iz · sun-day"},
+    {t:"I go to school on Monday.",e:"🏫",p:"I · go · too · skool · on · mun-day"},
+    {t:"Sunday is a holiday.",e:"🎉",p:"sun-day · iz · uh · hol-uh-day"},
+    {t:"I love Friday!",e:"😍",p:"I · luv · fry-day"},
+  ]},
+]},
+
+{id:11,label:"🌤️ Weather",color:"#03A9F4",bg:"rgba(3,169,244,0.15)",groups:[
+  {h:"What is the weather?",s:[
+    {t:"It is sunny today.",e:"☀️",p:"it · iz · sun-ee · too-day"},
+    {t:"It is raining today.",e:"🌧️",p:"it · iz · rayn-ing · too-day"},
+    {t:"It is windy today.",e:"💨",p:"it · iz · win-dee · too-day"},
+    {t:"It is cold today.",e:"🥶",p:"it · iz · kold · too-day"},
+    {t:"It is hot today.",e:"🥵",p:"it · iz · hot · too-day"},
+    {t:"I see clouds.",e:"☁️",p:"I · see · klowdz"},
+    {t:"I see a rainbow.",e:"🌈",p:"I · see · uh · rayn-boh"},
+    {t:"I see lightning.",e:"⚡",p:"I · see · lyt-ning"},
+    {t:"It is foggy.",e:"🌫️",p:"it · iz · fog-ee"},
+    {t:"I love the rain!",e:"🌧️",p:"I · luv · thee · rayn"},
+  ]},
+]},
+
+{id:12,label:"🏠 My Home",color:"#795548",bg:"rgba(121,85,72,0.2)",groups:[
+  {h:"Rooms and things",s:[
+    {t:"This is my room.",e:"🛏️",p:"dis · iz · my · room"},
+    {t:"I sleep in my bed.",e:"😴",p:"I · sleep · in · my · bed"},
+    {t:"I eat in the kitchen.",e:"🍽️",p:"I · eet · in · thee · kit-chen"},
+    {t:"I play in the hall.",e:"🎮",p:"I · play · in · thee · hawl"},
+    {t:"I bath in the bathroom.",e:"🛁",p:"I · bath · in · thee · bath-room"},
+    {t:"I sit on the sofa.",e:"🛋️",p:"I · sit · on · thee · so-fuh"},
+    {t:"I watch TV in the hall.",e:"📺",p:"I · woch · tee-vee · in · thee · hawl"},
+    {t:"My house has a garden.",e:"🌻",p:"my · hows · haz · uh · gar-den"},
+    {t:"I open the door.",e:"🚪",p:"I · oh-pen · thee · dor"},
+    {t:"I close the window.",e:"🪟",p:"I · kloz · thee · win-doh"},
+  ]},
+]},
+
+{id:13,label:"🏫 My School",color:"#FF9800",bg:"rgba(255,152,0,0.16)",groups:[
+  {h:"School sentences",s:[
+    {t:"I go to school.",e:"🏫",p:"I · go · too · skool"},
+    {t:"I like my school.",e:"❤️🏫",p:"I · lyk · my · skool"},
+    {t:"My teacher is nice.",e:"👩‍🏫",p:"my · tee-cher · iz · nys"},
+    {t:"I have many friends.",e:"👫",p:"I · hav · men-ee · frendz"},
+    {t:"I sit on my chair.",e:"🪑",p:"I · sit · on · my · chair"},
+    {t:"I write on the board.",e:"📝",p:"I · ryt · on · thee · bord"},
+    {t:"I carry my school bag.",e:"🎒",p:"I · kar-ee · my · skool · bag"},
+    {t:"I read a book.",e:"📖",p:"I · reed · uh · book"},
+    {t:"I draw a picture.",e:"🎨",p:"I · draw · uh · pik-cher"},
+    {t:"School is fun!",e:"🎉",p:"skool · iz · fun"},
+  ]},
+]},
+
+{id:14,label:"🌱 Plants",color:"#4CAF50",bg:"rgba(76,175,80,0.16)",groups:[
+  {h:"Nature around me",s:[
+    {t:"I see a big tree.",e:"🌳",p:"I · see · uh · big · tree"},
+    {t:"I see a green leaf.",e:"🍃",p:"I · see · uh · green · leef"},
+    {t:"I see a red flower.",e:"🌹",p:"I · see · uh · red · flow-er"},
+    {t:"I smell the flower.",e:"👃🌸",p:"I · smel · thee · flow-er"},
+    {t:"The tree is very tall.",e:"🌲",p:"thee · tree · iz · ver-ee · tawl"},
+    {t:"I water the plant.",e:"🪴",p:"I · waw-ter · thee · plant"},
+    {t:"The flower is beautiful.",e:"🌺",p:"thee · flow-er · iz · byoo-ti-ful"},
+    {t:"Leaves are green.",e:"🍀",p:"leevz · ar · green"},
+    {t:"Fruits grow on trees.",e:"🍋",p:"froots · groh · on · treez"},
+    {t:"I love nature.",e:"🌿",p:"I · luv · nay-cher"},
+  ]},
+]},
+
+{id:15,label:"🚗 Transport",color:"#607D8B",bg:"rgba(96,125,139,0.2)",groups:[
+  {h:"Vehicles",s:[
+    {t:"I see a car.",e:"🚗",p:"I · see · uh · kar"},
+    {t:"I see a bus.",e:"🚌",p:"I · see · uh · bus"},
+    {t:"I see a train.",e:"🚂",p:"I · see · uh · trayn"},
+    {t:"I see an aeroplane.",e:"✈️",p:"I · see · un · air-oh-playn"},
+    {t:"I see a boat.",e:"⛵",p:"I · see · uh · boht"},
+    {t:"I see a bicycle.",e:"🚲",p:"I · see · uh · by-sik-ul"},
+    {t:"I ride in a car.",e:"🚗",p:"I · ryd · in · uh · kar"},
+    {t:"I go by bus.",e:"🚌",p:"I · go · by · bus"},
+    {t:"I travel by train.",e:"🚂",p:"I · trav-ul · by · trayn"},
+    {t:"The aeroplane flies high.",e:"✈️",p:"thee · air-oh-playn · flyz · hy"},
+    {t:"I see a truck.",e:"🚛",p:"I · see · uh · truk"},
+    {t:"I see a rickshaw.",e:"🛺",p:"I · see · uh · rik-shaw"},
+  ]},
+]},
+
+{id:16,label:"🕐 Time",color:"#9C27B0",bg:"rgba(156,39,176,0.17)",groups:[
+  {h:"Time of day",s:[
+    {t:"I wake up in the morning.",e:"🌅",p:"I · wayk · up · in · thee · mor-ning"},
+    {t:"I eat lunch in the afternoon.",e:"🍽️",p:"I · eet · lunch · in · thee · af-ter-noon"},
+    {t:"I play in the evening.",e:"🌆",p:"I · play · in · thee · eev-ning"},
+    {t:"I sleep at night.",e:"🌙",p:"I · sleep · at · nyt"},
+    {t:"Morning is fresh and cool.",e:"🌤️",p:"mor-ning · iz · fresh · und · kool"},
+    {t:"I brush my teeth in the morning.",e:"🪥",p:"I · brush · my · teeth · in · thee · mor-ning"},
+    {t:"I pray in the morning.",e:"🙏",p:"I · pray · in · thee · mor-ning"},
+    {t:"It is time to eat.",e:"🍽️",p:"it · iz · tym · too · eet"},
+    {t:"It is time to sleep.",e:"😴",p:"it · iz · tym · too · sleep"},
+    {t:"It is time to go.",e:"🚶",p:"it · iz · tym · too · go"},
+  ]},
+]},
+
+{id:17,label:"💪 My Body",color:"#F44336",bg:"rgba(244,67,54,0.17)",groups:[
+  {h:"Body parts",s:[
+    {t:"I have two eyes.",e:"👀",p:"I · hav · too · yz"},
+    {t:"I have two ears.",e:"👂",p:"I · hav · too · eerz"},
+    {t:"I have a nose.",e:"👃",p:"I · hav · uh · nohz"},
+    {t:"I have a mouth.",e:"👄",p:"I · hav · uh · mowth"},
+    {t:"I have two hands.",e:"👐",p:"I · hav · too · handz"},
+    {t:"I have two legs.",e:"🦵",p:"I · hav · too · legz"},
+    {t:"I have ten fingers.",e:"🖐️",p:"I · hav · ten · fing-gerz"},
+    {t:"I have ten toes.",e:"🦶",p:"I · hav · ten · tohz"},
+    {t:"My hair is black.",e:"💇",p:"my · hair · iz · blak"},
+    {t:"I wash my face.",e:"🧼",p:"I · wash · my · fays"},
+    {t:"I brush my teeth.",e:"🪥",p:"I · brush · my · teeth"},
+    {t:"I comb my hair.",e:"💈",p:"I · kohm · my · hair"},
+  ]},
+]},
+
+{id:18,label:"🌙 Bedtime",color:"#3F51B5",bg:"rgba(63,81,181,0.18)",groups:[
+  {h:"Goodnight routine",s:[
+    {t:"I am sleepy.",e:"😴",p:"I · am · sleep-ee"},
+    {t:"I brush my teeth.",e:"🪥",p:"I · brush · my · teeth"},
+    {t:"I wash my face.",e:"🧼",p:"I · wash · my · fays"},
+    {t:"I change my clothes.",e:"👕",p:"I · chaynj · my · klohz"},
+    {t:"I get into my bed.",e:"🛏️",p:"I · get · in-too · my · bed"},
+    {t:"Mama reads me a story.",e:"📖",p:"mah-mah · reeds · mee · uh · stor-ee"},
+    {t:"I say good night.",e:"🌙",p:"I · say · good · nyt"},
+    {t:"I close my eyes.",e:"😌",p:"I · kloz · my · yz"},
+    {t:"I love you mama.",e:"❤️",p:"I · luv · yoo · mah-mah"},
+    {t:"I love you papa.",e:"❤️",p:"I · luv · yoo · pah-pah"},
+    {t:"I am not scared.",e:"💪",p:"I · am · not · skaird"},
+    {t:"Sweet dreams!",e:"💭",p:"sweet · dreemz"},
+  ]},
+]},
+
+{id:19,label:"🌈 Shapes",color:"#00BCD4",bg:"rgba(0,188,212,0.16)",groups:[
+  {h:"Shape names",s:[
+    {t:"A circle is round.",e:"⭕",p:"uh · ser-kul · iz · rownd"},
+    {t:"A square has four sides.",e:"⬜",p:"uh · skwair · haz · for · sydz"},
+    {t:"A triangle has three sides.",e:"🔺",p:"uh · try-ang-gul · haz · three · sydz"},
+    {t:"A star has five points.",e:"⭐",p:"uh · star · haz · fyv · poynts"},
+    {t:"I draw a circle.",e:"⭕",p:"I · draw · uh · ser-kul"},
+    {t:"I draw a square.",e:"⬜",p:"I · draw · uh · skwair"},
+    {t:"I draw a triangle.",e:"🔺",p:"I · draw · uh · try-ang-gul"},
+    {t:"I draw a star.",e:"⭐",p:"I · draw · uh · star"},
+    {t:"The sun is round.",e:"🌞",p:"thee · sun · iz · rownd"},
+    {t:"The ball is round.",e:"⚽",p:"thee · bawl · iz · rownd"},
+  ]},
+]},
+
+{id:20,label:"🏋️ Action Words",color:"#FF5722",bg:"rgba(255,87,34,0.17)",groups:[
+  {h:"Things I do",s:[
+    {t:"I run fast.",e:"🏃",p:"I · run · fast"},
+    {t:"I jump high.",e:"🦘",p:"I · jump · hy"},
+    {t:"I walk slowly.",e:"🚶",p:"I · wawk · sloh-lee"},
+    {t:"I clap my hands.",e:"👏",p:"I · klap · my · handz"},
+    {t:"I wave my hand.",e:"👋",p:"I · wayv · my · hand"},
+    {t:"I sit down.",e:"🪑",p:"I · sit · down"},
+    {t:"I stand up.",e:"🧍",p:"I · stand · up"},
+    {t:"I open my mouth.",e:"😮",p:"I · oh-pen · my · mowth"},
+    {t:"I close my eyes.",e:"😌",p:"I · kloz · my · yz"},
+    {t:"I spin around.",e:"🌀",p:"I · spin · uh-rownd"},
+    {t:"I touch my nose.",e:"👃",p:"I · tuch · my · nohz"},
+    {t:"I shake my head.",e:"🙅",p:"I · shayk · my · hed"},
+    {t:"I nod my head.",e:"🙆",p:"I · nod · my · hed"},
+    {t:"I stretch my arms.",e:"🙆",p:"I · strech · my · armz"},
+  ]},
+]},
+
+{id:21,label:"🌍 Places",color:"#1ABC9C",bg:"rgba(26,188,156,0.16)",groups:[
+  {h:"I go to…",s:[
+    {t:"I go to school.",e:"🏫",p:"I · go · too · skool"},
+    {t:"I go to the park.",e:"🏞️",p:"I · go · too · thee · park"},
+    {t:"I go to the market.",e:"🛒",p:"I · go · too · thee · mar-kit"},
+    {t:"I go to the temple.",e:"🛕",p:"I · go · too · thee · tem-pul"},
+    {t:"I go to the hospital.",e:"🏥",p:"I · go · too · thee · hos-pi-tul"},
+    {t:"I go to my nani's house.",e:"🏡",p:"I · go · too · my · nah-neez · hows"},
+    {t:"I go to the beach.",e:"🏖️",p:"I · go · too · thee · beech"},
+    {t:"I go to the zoo.",e:"🦁",p:"I · go · too · thee · zoo"},
+    {t:"I love the park.",e:"🌳",p:"I · luv · thee · park"},
+    {t:"The zoo has many animals.",e:"🐾",p:"thee · zoo · haz · men-ee · an-uh-mulz"},
+  ]},
+]},
+
+{id:22,label:"🍳 Morning Routine",color:"#FF9800",bg:"rgba(255,152,0,0.17)",groups:[
+  {h:"My morning",s:[
+    {t:"I wake up.",e:"🌅",p:"I · wayk · up"},
+    {t:"I say good morning.",e:"😊",p:"I · say · good · mor-ning"},
+    {t:"I brush my teeth.",e:"🪥",p:"I · brush · my · teeth"},
+    {t:"I take a bath.",e:"🛁",p:"I · tayk · uh · bath"},
+    {t:"I wear my clothes.",e:"👕",p:"I · wair · my · klohz"},
+    {t:"I eat my breakfast.",e:"🍳",p:"I · eet · my · brek-fust"},
+    {t:"I drink my milk.",e:"🥛",p:"I · drink · my · milk"},
+    {t:"I comb my hair.",e:"💈",p:"I · kohm · my · hair"},
+    {t:"I pack my school bag.",e:"🎒",p:"I · pak · my · skool · bag"},
+    {t:"I am ready for school.",e:"🏫",p:"I · am · red-ee · for · skool"},
+    {t:"I say bye to mama.",e:"👋",p:"I · say · by · too · mah-mah"},
+  ]},
+]},
+
+{id:23,label:"🎵 Songs & Rhymes",color:"#E91E63",bg:"rgba(233,30,99,0.16)",groups:[
+  {h:"Fun rhyme sentences",s:[
+    {t:"Twinkle twinkle little star.",e:"⭐",p:"twin-kul · twin-kul · lit-ul · star"},
+    {t:"How I wonder what you are.",e:"🤔",p:"how · I · wun-der · wot · yoo · ar"},
+    {t:"Up above the world so high.",e:"🌍",p:"up · uh-buv · thee · werld · so · hy"},
+    {t:"Like a diamond in the sky.",e:"💎",p:"lyk · uh · dy-uh-mund · in · thee · sky"},
+    {t:"Jack and Jill went up the hill.",e:"⛰️",p:"jak · und · jil · went · up · thee · hil"},
+    {t:"One two three four five.",e:"🔢",p:"wun · too · three · for · fyv"},
+    {t:"Once I caught a fish alive.",e:"🐟",p:"wuns · I · kawt · uh · fish · uh-lyv"},
+    {t:"Baa baa black sheep.",e:"🐑",p:"bah · bah · blak · sheep"},
+    {t:"Have you any wool?",e:"🧶",p:"hav · yoo · en-ee · wool"},
+    {t:"Humpty Dumpty sat on a wall.",e:"🥚",p:"hump-tee · dump-tee · sat · on · uh · wawl"},
+    {t:"Rain rain go away.",e:"🌧️",p:"rayn · rayn · go · uh-way"},
+    {t:"Come again another day.",e:"📅",p:"kum · uh-gen · uh-nuth-er · day"},
+  ]},
+]},
+
+{id:24,label:"💡 Smart Questions",color:"#9C27B0",bg:"rgba(156,39,176,0.16)",groups:[
+  {h:"Questions to ask",s:[
+    {t:"What is this?",e:"❓",p:"wot · iz · dis"},
+    {t:"Who is that?",e:"❓",p:"hoo · iz · dat"},
+    {t:"Where is mama?",e:"❓",p:"wair · iz · mah-mah"},
+    {t:"When do we eat?",e:"❓",p:"wen · doo · wee · eet"},
+    {t:"Why are you sad?",e:"❓",p:"wy · ar · yoo · sad"},
+    {t:"How are you?",e:"❓",p:"how · ar · yoo"},
+    {t:"Can I play?",e:"❓",p:"kan · I · play"},
+    {t:"May I have water?",e:"❓",p:"may · I · hav · waw-ter"},
+    {t:"Is it time to eat?",e:"❓",p:"iz · it · tym · too · eet"},
+    {t:"What colour is this?",e:"🌈",p:"wot · kul-er · iz · dis"},
+  ]},
+]},
+
+{id:25,label:"🎂 Birthday",color:"#FF4081",bg:"rgba(255,64,129,0.16)",groups:[
+  {h:"Birthday fun",s:[
+    {t:"Today is my birthday!",e:"🎂",p:"too-day · iz · my · berth-day"},
+    {t:"Happy birthday to you!",e:"🎉",p:"hap-ee · berth-day · too · yoo"},
+    {t:"I am four years old.",e:"4️⃣",p:"I · am · for · yeerz · old"},
+    {t:"I love cake!",e:"🎂",p:"I · luv · kayk"},
+    {t:"Blow the candles!",e:"🕯️",p:"bloh · thee · kan-dulz"},
+    {t:"Make a wish!",e:"⭐",p:"mayk · uh · wish"},
+    {t:"I got a gift!",e:"🎁",p:"I · got · uh · gift"},
+    {t:"Thank you for the gift.",e:"🙏🎁",p:"thank · yoo · for · thee · gift"},
+    {t:"This is my party!",e:"🥳",p:"dis · iz · my · par-tee"},
+    {t:"I am so happy today!",e:"😄",p:"I · am · so · hap-ee · too-day"},
+  ]},
+]},
+
+{id:26,label:"🎭 Opposites",color:"#00897B",bg:"rgba(0,137,123,0.17)",groups:[
+  {h:"Big and small",s:[
+    {t:"The elephant is big.",e:"🐘",p:"thee · el-uh-funt · iz · big"},
+    {t:"The ant is small.",e:"🐜",p:"thee · ant · iz · smawl"},
+    {t:"This is hot.",e:"🔥",p:"dis · iz · hot"},
+    {t:"This is cold.",e:"🧊",p:"dis · iz · kold"},
+    {t:"The bag is heavy.",e:"🎒",p:"thee · bag · iz · hev-ee"},
+    {t:"The feather is light.",e:"🪶",p:"thee · feth-er · iz · lyt"},
+    {t:"I am happy.",e:"😄",p:"I · am · hap-ee"},
+    {t:"I am sad.",e:"😢",p:"I · am · sad"},
+    {t:"The sky is up.",e:"☁️",p:"thee · sky · iz · up"},
+    {t:"The ground is down.",e:"🌱",p:"thee · grownd · iz · down"},
+    {t:"Day is bright.",e:"☀️",p:"day · iz · bryt"},
+    {t:"Night is dark.",e:"🌑",p:"nyt · iz · dark"},
+  ]},
+]},
+
+{id:27,label:"🌠 Space",color:"#1A237E",bg:"rgba(26,35,126,0.3)",groups:[
+  {h:"Up in the sky",s:[
+    {t:"I see the moon.",e:"🌕",p:"I · see · thee · moon"},
+    {t:"I see the stars.",e:"⭐",p:"I · see · thee · starz"},
+    {t:"I see the sun.",e:"☀️",p:"I · see · thee · sun"},
+    {t:"The moon is bright.",e:"🌕",p:"thee · moon · iz · bryt"},
+    {t:"Stars shine at night.",e:"🌟",p:"starz · shyn · at · nyt"},
+    {t:"The sun rises in the morning.",e:"🌅",p:"thee · sun · ry-zez · in · thee · mor-ning"},
+    {t:"The sky is blue.",e:"🔵",p:"thee · sky · iz · bloo"},
+    {t:"Clouds float in the sky.",e:"☁️",p:"klowdz · floht · in · thee · sky"},
+    {t:"I love watching stars.",e:"🌌",p:"I · luv · woch-ing · starz"},
+    {t:"The sky is big and wide.",e:"🌌",p:"thee · sky · iz · big · und · wyd"},
+  ]},
+]},
+
+{id:28,label:"🧹 Helping at Home",color:"#8BC34A",bg:"rgba(139,195,74,0.16)",groups:[
+  {h:"I help mama and papa",s:[
+    {t:"I help mama cook.",e:"👩‍🍳",p:"I · help · mah-mah · kook"},
+    {t:"I put my toys away.",e:"🧸",p:"I · put · my · toyz · uh-way"},
+    {t:"I water the plants.",e:"🌿",p:"I · waw-ter · thee · plants"},
+    {t:"I wipe the table.",e:"🧽",p:"I · wyp · thee · tay-bul"},
+    {t:"I throw rubbish in the bin.",e:"🗑️",p:"I · throh · rub-ish · in · thee · bin"},
+    {t:"I fold my clothes.",e:"👕",p:"I · fohld · my · klohz"},
+    {t:"I set the plates on the table.",e:"🍽️",p:"I · set · thee · playts · on · thee · tay-bul"},
+    {t:"I am a good helper.",e:"💪",p:"I · am · uh · good · hel-per"},
+    {t:"Mama is happy with me.",e:"😊",p:"mah-mah · iz · hap-ee · with · mee"},
+    {t:"I keep my room clean.",e:"🧹",p:"I · keep · my · room · kleen"},
+  ]},
+]},
+
+{id:29,label:"🦁 Zoo Visit",color:"#F57F17",bg:"rgba(245,127,23,0.17)",groups:[
+  {h:"At the zoo",s:[
+    {t:"I went to the zoo.",e:"🎡",p:"I · went · too · thee · zoo"},
+    {t:"I saw a big lion.",e:"🦁",p:"I · saw · uh · big · ly-un"},
+    {t:"The giraffe has a long neck.",e:"🦒",p:"thee · juh-raff · haz · uh · long · nek"},
+    {t:"The elephant is very big.",e:"🐘",p:"thee · el-uh-funt · iz · ver-ee · big"},
+    {t:"The monkey is jumping.",e:"🐒",p:"thee · mun-kee · iz · jump-ing"},
+    {t:"I see a zebra.",e:"🦓",p:"I · see · uh · zee-bruh"},
+    {t:"The parrot is talking.",e:"🦜",p:"thee · par-ut · iz · taw-king"},
+    {t:"I like the zoo.",e:"❤️🦁",p:"I · lyk · thee · zoo"},
+    {t:"The zoo is very big.",e:"🏟️",p:"thee · zoo · iz · ver-ee · big"},
+    {t:"I want to come again.",e:"😄",p:"I · wont · too · kum · uh-gen"},
+  ]},
+]},
+
+{id:30,label:"🚿 Clean & Healthy",color:"#26C6DA",bg:"rgba(38,198,218,0.16)",groups:[
+  {h:"Being clean",s:[
+    {t:"I wash my hands.",e:"🧼",p:"I · wash · my · handz"},
+    {t:"I brush my teeth.",e:"🪥",p:"I · brush · my · teeth"},
+    {t:"I take a bath every day.",e:"🛁",p:"I · tayk · uh · bath · ev-ree · day"},
+    {t:"I wear clean clothes.",e:"👕",p:"I · wair · kleen · klohz"},
+    {t:"I comb my hair.",e:"💈",p:"I · kohm · my · hair"},
+    {t:"I keep my nails clean.",e:"💅",p:"I · keep · my · naylz · kleen"},
+    {t:"I eat clean food.",e:"🍽️",p:"I · eet · kleen · food"},
+    {t:"I drink clean water.",e:"💧",p:"I · drink · kleen · waw-ter"},
+    {t:"Cleanliness is good.",e:"✨",p:"kleen-lee-nes · iz · good"},
+    {t:"I am a clean boy.",e:"😊",p:"I · am · uh · kleen · boy"},
+  ]},
+]},
+
+{id:31,label:"🎁 Gifts & Sharing",color:"#AB47BC",bg:"rgba(171,71,188,0.17)",groups:[
+  {h:"Giving and sharing",s:[
+    {t:"I share my toys.",e:"🧸",p:"I · shair · my · toyz"},
+    {t:"I give you a cookie.",e:"🍪",p:"I · giv · yoo · uh · kook-ee"},
+    {t:"Here, take this.",e:"🤲",p:"heer · tayk · dis"},
+    {t:"You can have some.",e:"😊",p:"yoo · kan · hav · sum"},
+    {t:"Sharing is caring.",e:"❤️",p:"shair-ing · iz · kair-ing"},
+    {t:"I got a new toy.",e:"🎁",p:"I · got · uh · nyoo · toy"},
+    {t:"Thank you for the gift.",e:"🙏",p:"thank · yoo · for · thee · gift"},
+    {t:"I like giving gifts.",e:"🎁",p:"I · lyk · giv-ing · gifts"},
+    {t:"I help my friends.",e:"🤝",p:"I · help · my · frendz"},
+    {t:"Friends share everything.",e:"🤝",p:"frendz · shair · ev-ree-thing"},
+  ]},
+]},
+
+{id:32,label:"🌊 At the Beach",color:"#0288D1",bg:"rgba(2,136,209,0.17)",groups:[
+  {h:"Beach fun",s:[
+    {t:"I am at the beach.",e:"🏖️",p:"I · am · at · thee · beech"},
+    {t:"I see the big waves.",e:"🌊",p:"I · see · thee · big · wayvz"},
+    {t:"The water is cold.",e:"💧",p:"thee · waw-ter · iz · kold"},
+    {t:"I play in the sand.",e:"🏝️",p:"I · play · in · thee · sand"},
+    {t:"I build a sand castle.",e:"🏰",p:"I · bild · uh · sand · kas-ul"},
+    {t:"I collect shells.",e:"🐚",p:"I · kuh-lekt · shelz"},
+    {t:"I see a crab.",e:"🦀",p:"I · see · uh · krab"},
+    {t:"I splash in the water.",e:"💦",p:"I · splash · in · thee · waw-ter"},
+    {t:"The beach is beautiful.",e:"🌅",p:"thee · beech · iz · byoo-ti-ful"},
+    {t:"I love the beach!",e:"❤️",p:"I · luv · thee · beech"},
+  ]},
+]},
+
+{id:33,label:"🎪 Festival Fun",color:"#F44336",bg:"rgba(244,67,54,0.16)",groups:[
+  {h:"Indian festivals",s:[
+    {t:"I love Diwali!",e:"🪔",p:"I · luv · dee-wah-lee"},
+    {t:"We light diyas.",e:"🪔",p:"wee · lyt · dee-yuhz"},
+    {t:"We burst crackers.",e:"🎆",p:"wee · berst · krak-erz"},
+    {t:"I love Holi!",e:"🎨",p:"I · luv · ho-lee"},
+    {t:"I play with colours.",e:"🌈",p:"I · play · with · kul-erz"},
+    {t:"I love eating sweets.",e:"🍬",p:"I · luv · eet-ing · sweetз"},
+    {t:"We celebrate together.",e:"🎉",p:"wee · sel-uh-brayt · tuh-geth-er"},
+    {t:"We wear new clothes.",e:"👘",p:"wee · wair · nyoo · klohz"},
+    {t:"We visit relatives.",e:"🏡",p:"wee · viz-it · rel-uh-tivz"},
+    {t:"Festivals are fun!",e:"🎊",p:"fes-tuh-vulz · ar · fun"},
+  ]},
+]},
+
+{id:34,label:"👕 Clothes",color:"#78909C",bg:"rgba(120,144,156,0.2)",groups:[
+  {h:"What I wear",s:[
+    {t:"I wear a shirt.",e:"👕",p:"I · wair · uh · shert"},
+    {t:"I wear trousers.",e:"👖",p:"I · wair · trow-zerz"},
+    {t:"I wear shoes.",e:"👟",p:"I · wair · shooz"},
+    {t:"I wear socks.",e:"🧦",p:"I · wair · soks"},
+    {t:"I wear a cap.",e:"🧢",p:"I · wair · uh · kap"},
+    {t:"I wear a uniform.",e:"👔",p:"I · wair · uh · yoo-ni-form"},
+    {t:"My clothes are clean.",e:"✨",p:"my · klohz · ar · kleen"},
+    {t:"My shoes are tight.",e:"👟",p:"my · shooz · ar · tyt"},
+    {t:"I like my new shirt.",e:"❤️",p:"I · lyk · my · nyoo · shert"},
+    {t:"Mama washes my clothes.",e:"👩",p:"mah-mah · wash-ez · my · klohz"},
+  ]},
+]},
+
+{id:35,label:"🌻 Garden",color:"#CDDC39",bg:"rgba(205,220,57,0.16)",groups:[
+  {h:"In the garden",s:[
+    {t:"I play in the garden.",e:"🌻",p:"I · play · in · thee · gar-den"},
+    {t:"I see butterflies.",e:"🦋",p:"I · see · but-er-flyz"},
+    {t:"I see bees.",e:"🐝",p:"I · see · beez"},
+    {t:"The flowers are beautiful.",e:"🌸",p:"thee · flow-erz · ar · byoo-ti-ful"},
+    {t:"I smell the roses.",e:"🌹",p:"I · smel · thee · roh-zez"},
+    {t:"I see a bird on the tree.",e:"🐦🌳",p:"I · see · uh · berd · on · thee · tree"},
+    {t:"I dig in the mud.",e:"🪱",p:"I · dig · in · thee · mud"},
+    {t:"The garden is green.",e:"🌿",p:"thee · gar-den · iz · green"},
+    {t:"I plant a seed.",e:"🌱",p:"I · plant · uh · seed"},
+    {t:"I love my garden.",e:"❤️",p:"I · luv · my · gar-den"},
+  ]},
+]},
+
+{id:36,label:"📱 Technology",color:"#455A64",bg:"rgba(69,90,100,0.25)",groups:[
+  {h:"Simple tech words",s:[
+    {t:"I watch cartoons.",e:"📺",p:"I · woch · kar-toonz"},
+    {t:"I like Tom and Jerry.",e:"🐱🐭",p:"I · lyk · tom · und · jer-ee"},
+    {t:"I use the tablet.",e:"📱",p:"I · yooz · thee · tab-let"},
+    {t:"I play on the phone.",e:"📱",p:"I · play · on · thee · fohn"},
+    {t:"Mama calls on the phone.",e:"📞",p:"mah-mah · kawlz · on · thee · fohn"},
+    {t:"I talk to nani on video call.",e:"📹",p:"I · tawk · too · nah-nee · on · vid-ee-oh · kawl"},
+    {t:"I like the music.",e:"🎵",p:"I · lyk · thee · myoo-zik"},
+    {t:"I listen to songs.",e:"🎧",p:"I · lis-un · too · songz"},
+    {t:"No more screen time!",e:"🙅",p:"no · mor · skreen · tym"},
+    {t:"I put the phone down.",e:"📵",p:"I · put · thee · fohn · down"},
+  ]},
+]},
+
+{id:37,label:"🤒 Doctor Visit",color:"#00ACC1",bg:"rgba(0,172,193,0.17)",groups:[
+  {h:"At the doctor",s:[
+    {t:"I am not feeling well.",e:"🤒",p:"I · am · not · feel-ing · wel"},
+    {t:"My tummy hurts.",e:"😣",p:"my · tum-ee · herts"},
+    {t:"I have a fever.",e:"🌡️",p:"I · hav · uh · fee-ver"},
+    {t:"I have a cold.",e:"🤧",p:"I · hav · uh · kold"},
+    {t:"The doctor is kind.",e:"👨‍⚕️",p:"thee · dok-ter · iz · kynd"},
+    {t:"I open my mouth.",e:"😮",p:"I · oh-pen · my · mowth"},
+    {t:"The doctor gives me medicine.",e:"💊",p:"thee · dok-ter · givz · mee · med-uh-sun"},
+    {t:"I take my medicine.",e:"💊",p:"I · tayk · my · med-uh-sun"},
+    {t:"I am getting better.",e:"💪",p:"I · am · get-ing · bet-er"},
+    {t:"Thank you doctor!",e:"🙏",p:"thank · yoo · dok-ter"},
+  ]},
+]},
+
+{id:38,label:"🧠 Smart Words",color:"#7B1FA2",bg:"rgba(123,31,162,0.2)",groups:[
+  {h:"Useful everyday words",s:[
+    {t:"Yes, I can do it.",e:"✅",p:"yes · I · kan · doo · it"},
+    {t:"No, I do not want it.",e:"❌",p:"no · I · doo · not · wont · it"},
+    {t:"I do not know.",e:"🤷",p:"I · doo · not · noh"},
+    {t:"I understand.",e:"💡",p:"I · un-der-stand"},
+    {t:"Please say it again.",e:"🔁",p:"pleez · say · it · uh-gen"},
+    {t:"I am trying.",e:"💪",p:"I · am · try-ing"},
+    {t:"I need help.",e:"🤝",p:"I · need · help"},
+    {t:"Wait, please.",e:"⏳",p:"wayt · pleez"},
+    {t:"I am ready.",e:"✅",p:"I · am · red-ee"},
+    {t:"Let us go!",e:"🚀",p:"let · us · go"},
+    {t:"It is okay.",e:"👌",p:"it · iz · oh-kay"},
+    {t:"No thank you.",e:"🙅",p:"no · thank · yoo"},
+  ]},
+]},
+
+{id:39,label:"🏏 Sports",color:"#2E7D32",bg:"rgba(46,125,50,0.17)",groups:[
+  {h:"Games and sports",s:[
+    {t:"I play cricket.",e:"🏏",p:"I · play · krik-it"},
+    {t:"I play football.",e:"⚽",p:"I · play · foot-bawl"},
+    {t:"I play badminton.",e:"🏸",p:"I · play · bad-min-ton"},
+    {t:"I run in a race.",e:"🏃",p:"I · run · in · uh · rays"},
+    {t:"I swim in the pool.",e:"🏊",p:"I · swim · in · thee · pool"},
+    {t:"I catch the ball.",e:"⚾",p:"I · kach · thee · bawl"},
+    {t:"I throw the ball.",e:"⚽",p:"I · throh · thee · bawl"},
+    {t:"I kick the ball.",e:"⚽",p:"I · kik · thee · bawl"},
+    {t:"Sports keep me healthy.",e:"💪",p:"sports · keep · mee · hel-thee"},
+    {t:"I love playing outside.",e:"🌳",p:"I · luv · play-ing · owt-syd"},
+  ]},
+]},
+
+{id:40,label:"🌟 Compliments",color:"#F57C00",bg:"rgba(245,124,0,0.18)",groups:[
+  {h:"Nice things to say",s:[
+    {t:"You are so kind.",e:"😊",p:"yoo · ar · so · kynd"},
+    {t:"You are very smart.",e:"🧠",p:"yoo · ar · ver-ee · smart"},
+    {t:"You look beautiful.",e:"😍",p:"yoo · look · byoo-ti-ful"},
+    {t:"You are my best friend.",e:"🤝",p:"yoo · ar · my · best · frend"},
+    {t:"I love you so much.",e:"❤️",p:"I · luv · yoo · so · much"},
+    {t:"You did very well.",e:"👏",p:"yoo · did · ver-ee · wel"},
+    {t:"Well done!",e:"🎉",p:"wel · dun"},
+    {t:"Good job!",e:"👍",p:"good · job"},
+    {t:"You are the best!",e:"🏆",p:"yoo · ar · thee · best"},
+    {t:"That is amazing!",e:"🤩",p:"dat · iz · uh-may-zing"},
+  ]},
+]},
+
+{id:41,label:"🧩 Toys & Play",color:"#E040FB",bg:"rgba(224,64,251,0.16)",groups:[
+  {h:"Playing time",s:[
+    {t:"I play with blocks.",e:"🧱",p:"I · play · with · bloks"},
+    {t:"I play with Lego.",e:"🧩",p:"I · play · with · lee-go"},
+    {t:"I love my teddy bear.",e:"🧸",p:"I · luv · my · ted-ee · bair"},
+    {t:"I play with my car.",e:"🚗",p:"I · play · with · my · kar"},
+    {t:"I play with clay.",e:"🪣",p:"I · play · with · klay"},
+    {t:"I draw with crayons.",e:"🖍️",p:"I · draw · with · kray-onz"},
+    {t:"I colour the picture.",e:"🎨",p:"I · kul-er · thee · pik-cher"},
+    {t:"I blow bubbles.",e:"🫧",p:"I · bloh · bub-ulz"},
+    {t:"I spin the top.",e:"🌀",p:"I · spin · thee · top"},
+    {t:"Playtime is the best!",e:"🎉",p:"play-tym · iz · thee · best"},
+    {t:"I play hide and seek.",e:"🙈",p:"I · play · hyd · und · seek"},
+    {t:"I play with my friend.",e:"👫",p:"I · play · with · my · frend"},
+  ]},
+]},
+
+{id:42,label:"🍿 Movie Time",color:"#BF360C",bg:"rgba(191,54,12,0.18)",groups:[
+  {h:"Watching cartoons",s:[
+    {t:"I want to watch cartoons.",e:"📺",p:"I · wont · too · woch · kar-toonz"},
+    {t:"Doraemon is my favourite.",e:"🤖",p:"dor-ee-mon · iz · my · fay-vrit"},
+    {t:"Motu Patlu is very funny.",e:"😂",p:"moh-too · pat-loo · iz · ver-ee · fun-ee"},
+    {t:"I like action cartoons.",e:"💥",p:"I · lyk · ak-shun · kar-toonz"},
+    {t:"I sit quietly and watch.",e:"🤫",p:"I · sit · kwye-et-lee · und · woch"},
+    {t:"The movie is very good.",e:"🎬",p:"thee · moo-vee · iz · ver-ee · good"},
+    {t:"I laugh at the funny parts.",e:"😂",p:"I · laf · at · thee · fun-ee · parts"},
+    {t:"I am scared of the ghost.",e:"👻",p:"I · am · skaird · ov · thee · gohst"},
+    {t:"The hero is very strong.",e:"💪",p:"thee · hee-ro · iz · ver-ee · strong"},
+    {t:"I love watching movies!",e:"🍿",p:"I · luv · woch-ing · moo-veez"},
+  ]},
+]},
+
+{id:43,label:"🙏 Prayers",color:"#5C6BC0",bg:"rgba(92,107,192,0.2)",groups:[
+  {h:"Simple prayers and values",s:[
+    {t:"I fold my hands and pray.",e:"🙏",p:"I · fohld · my · handz · und · pray"},
+    {t:"God is very kind.",e:"✨",p:"god · iz · ver-ee · kynd"},
+    {t:"Thank God for everything.",e:"🙏",p:"thank · god · for · ev-ree-thing"},
+    {t:"I am grateful.",e:"😇",p:"I · am · grayt-ful"},
+    {t:"I will be good today.",e:"😊",p:"I · wil · bee · good · too-day"},
+    {t:"I will not lie.",e:"🙅",p:"I · wil · not · ly"},
+    {t:"I will not fight.",e:"☮️",p:"I · wil · not · fyt"},
+    {t:"I love everyone.",e:"❤️",p:"I · luv · ev-ree-wun"},
+    {t:"I help others.",e:"🤝",p:"I · help · uth-erz"},
+    {t:"Kindness is beautiful.",e:"💛",p:"kynd-nes · iz · byoo-ti-ful"},
+  ]},
+]},
+
+{id:44,label:"🚦 Safety Rules",color:"#D32F2F",bg:"rgba(211,47,47,0.18)",groups:[
+  {h:"Staying safe",s:[
+    {t:"I hold mama's hand.",e:"🤝",p:"I · hohld · mah-mahz · hand"},
+    {t:"I do not talk to strangers.",e:"🙅",p:"I · doo · not · tawk · too · strayn-jerz"},
+    {t:"I wear my helmet.",e:"⛑️",p:"I · wair · my · hel-met"},
+    {t:"I wear my seatbelt.",e:"🚗",p:"I · wair · my · seet-belt"},
+    {t:"I look before crossing the road.",e:"🚦",p:"I · look · buh-for · kros-ing · thee · rohd"},
+    {t:"I do not go out alone.",e:"🚫",p:"I · doo · not · go · owt · uh-lohn"},
+    {t:"I call mama if I am lost.",e:"📞",p:"I · kawl · mah-mah · if · I · am · lost"},
+    {t:"Fire is dangerous.",e:"🔥",p:"fyr · iz · dayn-jer-us"},
+    {t:"I stay away from fire.",e:"🚫🔥",p:"I · stay · uh-way · from · fyr"},
+    {t:"Safety first!",e:"🛡️",p:"sayf-tee · ferst"},
+  ]},
+]},
+
+{id:45,label:"🎤 Tongue Twisters",color:"#00695C",bg:"rgba(0,105,92,0.2)",groups:[
+  {h:"Fun to say fast (or slowly!)",s:[
+    {t:"She sells seashells.",e:"🐚",p:"shee · selz · see-shelz"},
+    {t:"Red lorry yellow lorry.",e:"🚚",p:"red · lor-ee · yel-oh · lor-ee"},
+    {t:"Peter Piper picked peppers.",e:"🌶️",p:"pee-ter · py-per · pikt · pep-erz"},
+    {t:"How much wood would a woodchuck chuck.",e:"🪵",p:"how · much · wood · wood · uh · wood-chuk · chuk"},
+    {t:"Fuzzy Wuzzy was a bear.",e:"🐻",p:"fuz-ee · wuz-ee · woz · uh · bair"},
+    {t:"Big black bug bit a big black bear.",e:"🐛🐻",p:"big · blak · bug · bit · uh · big · blak · bair"},
+    {t:"I saw a saw that could outsaw.",e:"🪚",p:"I · saw · uh · saw · dat · kood · owt-saw"},
+    {t:"Fresh french fried fish.",e:"🐟",p:"fresh · french · fryd · fish"},
+  ]},
+]},
+
+{id:46,label:"🌺 Nature Sounds",color:"#558B2F",bg:"rgba(85,139,47,0.18)",groups:[
+  {h:"Sounds in nature",s:[
+    {t:"The dog says woof woof.",e:"🐶",p:"thee · dog · sez · woof · woof"},
+    {t:"The cat says meow meow.",e:"🐱",p:"thee · kat · sez · mee-ow · mee-ow"},
+    {t:"The cow says moo moo.",e:"🐄",p:"thee · kow · sez · moo · moo"},
+    {t:"The bird says tweet tweet.",e:"🐦",p:"thee · berd · sez · tweet · tweet"},
+    {t:"The frog says ribbit ribbit.",e:"🐸",p:"thee · frog · sez · rib-it · rib-it"},
+    {t:"The lion says roar!",e:"🦁",p:"thee · ly-un · sez · ror"},
+    {t:"The snake says hiss hiss.",e:"🐍",p:"thee · snayk · sez · his · his"},
+    {t:"The bee says buzz buzz.",e:"🐝",p:"thee · bee · sez · buz · buz"},
+    {t:"Rain goes drip drip drop.",e:"🌧️",p:"rayn · gohz · drip · drip · drop"},
+    {t:"Thunder goes boom boom.",e:"⛈️",p:"thun-der · gohz · boom · boom"},
+    {t:"The clock goes tick tock.",e:"🕐",p:"thee · klok · gohz · tik · tok"},
+  ]},
+]},
+
+{id:47,label:"🧑‍🍳 Cooking",color:"#F4511E",bg:"rgba(244,81,30,0.17)",groups:[
+  {h:"In the kitchen",s:[
+    {t:"Mama cooks food.",e:"👩‍🍳",p:"mah-mah · kooks · food"},
+    {t:"The food smells good.",e:"😋",p:"thee · food · smelz · good"},
+    {t:"I stir the dal.",e:"🥄",p:"I · ster · thee · daal"},
+    {t:"Papa makes tea.",e:"☕",p:"pah-pah · mayks · tee"},
+    {t:"I wash the vegetables.",e:"🥕",p:"I · wash · thee · vej-tuh-bulz"},
+    {t:"I peel the banana.",e:"🍌",p:"I · peel · thee · buh-nah-nuh"},
+    {t:"I help cut the bread.",e:"🍞",p:"I · help · kut · thee · bred"},
+    {t:"Food is ready!",e:"🍽️",p:"food · iz · red-ee"},
+    {t:"Let us eat together.",e:"👨‍👩‍👦",p:"let · us · eet · tuh-geth-er"},
+    {t:"Everything is yummy!",e:"😋",p:"ev-ree-thing · iz · yum-ee"},
+  ]},
+]},
+
+{id:48,label:"✈️ Travel",color:"#0277BD",bg:"rgba(2,119,189,0.18)",groups:[
+  {h:"Going somewhere",s:[
+    {t:"We are going on a trip.",e:"✈️",p:"wee · ar · go-ing · on · uh · trip"},
+    {t:"I am very excited.",e:"🤩",p:"I · am · ver-ee · ek-sy-ted"},
+    {t:"We go to the airport.",e:"🛫",p:"wee · go · too · thee · air-port"},
+    {t:"The aeroplane is big.",e:"✈️",p:"thee · air-oh-playn · iz · big"},
+    {t:"I sit by the window.",e:"🪟",p:"I · sit · by · thee · win-doh"},
+    {t:"The clouds look like cotton.",e:"☁️",p:"thee · klowdz · look · lyk · kot-un"},
+    {t:"We land at the new city.",e:"🏙️",p:"wee · land · at · thee · nyoo · si-tee"},
+    {t:"I see new places.",e:"🗺️",p:"I · see · nyoo · plays-ez"},
+    {t:"Travel is so much fun!",e:"😄",p:"trav-ul · iz · so · much · fun"},
+    {t:"I want to travel everywhere.",e:"🌍",p:"I · wont · too · trav-ul · ev-ree-wair"},
+  ]},
+]},
+
+{id:49,label:"💬 My Favourites",color:"#AD1457",bg:"rgba(173,20,87,0.18)",groups:[
+  {h:"What I love most",s:[
+    {t:"My favourite colour is blue.",e:"💙",p:"my · fay-vrit · kul-er · iz · bloo"},
+    {t:"My favourite food is mango.",e:"🥭",p:"my · fay-vrit · food · iz · mang-go"},
+    {t:"My favourite toy is my car.",e:"🚗",p:"my · fay-vrit · toy · iz · my · kar"},
+    {t:"My favourite cartoon is Doraemon.",e:"🤖",p:"my · fay-vrit · kar-toon · iz · dor-ee-mon"},
+    {t:"My favourite person is mama.",e:"👩",p:"my · fay-vrit · per-sun · iz · mah-mah"},
+    {t:"My favourite place is the park.",e:"🌳",p:"my · fay-vrit · plays · iz · thee · park"},
+    {t:"My favourite game is cricket.",e:"🏏",p:"my · fay-vrit · gaym · iz · krik-it"},
+    {t:"My favourite animal is a dog.",e:"🐶",p:"my · fay-vrit · an-uh-mul · iz · uh · dog"},
+    {t:"My favourite song is Twinkle.",e:"⭐",p:"my · fay-vrit · song · iz · twin-kul"},
+    {t:"I love my family most!",e:"👨‍👩‍👦",p:"I · luv · my · fam-uh-lee · mohst"},
+  ]},
+]},
+];
+
+// EXTRA SENTENCES added to first few big cats inline via post-processing
+// (appended to groups below)
+
+// Patch extra sentences into categories
+(function patchExtras(){
+  // Extra for "I Have" (cat 0)
+  CATS[0].groups[0].s.push(
+    {t:"I have a pillow.",e:"🛏️",p:"I · hav · uh · pil-oh"},
+    {t:"I have a blanket.",e:"🧣",p:"I · hav · uh · blank-it"},
+    {t:"I have a water bottle.",e:"🍶",p:"I · hav · uh · waw-ter · bot-ul"},
+    {t:"I have a lunch box.",e:"🍱",p:"I · hav · uh · lunch · boks"},
+    {t:"I have a storybook.",e:"📕",p:"I · hav · uh · stor-ee-book"},
+    {t:"I have a painting set.",e:"🎨",p:"I · hav · uh · paynt-ing · set"},
+    {t:"I have a cycle.",e:"🚲",p:"I · hav · uh · sy-kul"},
+    {t:"I have a drum.",e:"🥁",p:"I · hav · uh · drum"},
+    {t:"I have a flute.",e:"🎵",p:"I · hav · uh · floot"},
+    {t:"I have a puzzle.",e:"🧩",p:"I · hav · uh · puz-ul"}
+  );
+  // Extra for "I Want" (cat 1)
+  CATS[1].groups[0].s.push(
+    {t:"I want to fly.",e:"✈️",p:"I · wont · too · fly"},
+    {t:"I want to climb.",e:"🧗",p:"I · wont · too · klym"},
+    {t:"I want to cook.",e:"🍳",p:"I · wont · too · kook"},
+    {t:"I want to paint.",e:"🎨",p:"I · wont · too · paynt"},
+    {t:"I want to play cricket.",e:"🏏",p:"I · wont · too · play · krik-it"},
+    {t:"I want to go to the park.",e:"🌳",p:"I · wont · too · go · too · thee · park"},
+    {t:"I want more biscuits.",e:"🍪",p:"I · wont · mor · bis-kits"},
+    {t:"I want to help papa.",e:"👨",p:"I · wont · too · help · pah-pah"},
+    {t:"I want a pet dog.",e:"🐶",p:"I · wont · uh · pet · dog"},
+    {t:"I want to visit nani.",e:"👵",p:"I · wont · too · viz-it · nah-nee"}
+  );
+  // Extra for Feelings
+  CATS[3].groups[0].s.push(
+    {t:"I feel great today.",e:"💪",p:"I · feel · grayt · too-day"},
+    {t:"I feel lonely.",e:"😔",p:"I · feel · lohn-lee"},
+    {t:"I feel proud.",e:"😤",p:"I · feel · prowd"},
+    {t:"I feel nervous.",e:"😬",p:"I · feel · ner-vus"},
+    {t:"I feel bored.",e:"😑",p:"I · feel · bord"},
+    {t:"I am laughing.",e:"😂",p:"I · am · laf-ing"}
+  );
+  // Extra for animals
+  CATS[6].groups[0].s.push(
+    {t:"I see a crocodile.",e:"🐊",p:"I · see · uh · krok-uh-dyle"},
+    {t:"I see a peacock.",e:"🦚",p:"I · see · uh · pee-kok"},
+    {t:"I see a tiger.",e:"🐅",p:"I · see · uh · ty-ger"},
+    {t:"I see a parrot.",e:"🦜",p:"I · see · uh · par-ut"},
+    {t:"I see a deer.",e:"🦌",p:"I · see · uh · deer"},
+    {t:"I see a cow eating grass.",e:"🐄",p:"I · see · uh · kow · eet-ing · gras"},
+    {t:"I see a camel.",e:"🐪",p:"I · see · uh · kay-mul"},
+    {t:"I see a penguin.",e:"🐧",p:"I · see · uh · peng-gwin"},
+    {t:"Animals are beautiful.",e:"🌿",p:"an-uh-mulz · ar · byoo-ti-ful"},
+    {t:"I love all animals.",e:"❤️",p:"I · luv · awl · an-uh-mulz"}
+  );
+  // Extra for food
+  CATS[7].groups[0].s.push(
+    {t:"I eat vegetables.",e:"🥦",p:"I · eet · vej-tuh-bulz"},
+    {t:"I eat a chapati.",e:"🫓",p:"I · eet · uh · chuh-pah-tee"},
+    {t:"I eat paneer.",e:"🧀",p:"I · eet · puh-neer"},
+    {t:"I eat biryani.",e:"🍛",p:"I · eet · beer-yah-nee"},
+    {t:"I eat idli.",e:"🫓",p:"I · eet · id-lee"},
+    {t:"Food gives me energy.",e:"⚡",p:"food · givz · mee · en-er-jee"}
+  );
+  // Extra for body
+  CATS[17].groups[0].s.push(
+    {t:"I have a back.",e:"🚶",p:"I · hav · uh · bak"},
+    {t:"I have a stomach.",e:"😮",p:"I · hav · uh · stum-uk"},
+    {t:"I have a forehead.",e:"🤔",p:"I · hav · uh · for-hed"},
+    {t:"I have shoulders.",e:"💪",p:"I · hav · shohl-derz"},
+    {t:"I have a tongue.",e:"😛",p:"I · hav · uh · tung"},
+    {t:"I have a chin.",e:"😌",p:"I · hav · uh · chin"},
+    {t:"My body is healthy.",e:"💪",p:"my · bod-ee · iz · hel-thee"}
+  );
+  // Extra for school
+  CATS[13].groups[0].s.push(
+    {t:"I raise my hand.",e:"🙋",p:"I · rayz · my · hand"},
+    {t:"I answer the question.",e:"💡",p:"I · an-ser · thee · kwes-chun"},
+    {t:"I count one to ten.",e:"🔢",p:"I · kownt · wun · too · ten"},
+    {t:"I write my name.",e:"✏️",p:"I · ryt · my · naym"},
+    {t:"I colour the picture.",e:"🖍️",p:"I · kul-er · thee · pik-cher"},
+    {t:"I love my school bag.",e:"🎒",p:"I · luv · my · skool · bag"},
+    {t:"I sit quietly.",e:"🤫",p:"I · sit · kwye-et-lee"}
+  );
+  // Extra for greetings
+  CATS[4].groups[1].s.push(
+    {t:"I am doing well.",e:"😊",p:"I · am · doo-ing · wel"},
+    {t:"Have a nice day!",e:"🌟",p:"hav · uh · nys · day"},
+    {t:"Good luck!",e:"🍀",p:"good · luk"},
+    {t:"I missed you!",e:"🤗",p:"I · mist · yoo"},
+    {t:"Welcome!",e:"🎉",p:"wel-kum"}
+  );
+  // Extra for action words
+  CATS[20].groups[0].s.push(
+    {t:"I hop like a frog.",e:"🐸",p:"I · hop · lyk · uh · frog"},
+    {t:"I fly like a bird.",e:"🐦",p:"I · fly · lyk · uh · berd"},
+    {t:"I swim like a fish.",e:"🐟",p:"I · swim · lyk · uh · fish"},
+    {t:"I roar like a lion.",e:"🦁",p:"I · ror · lyk · uh · ly-un"},
+    {t:"I bark like a dog.",e:"🐶",p:"I · bark · lyk · uh · dog"},
+    {t:"I crawl on the floor.",e:"🐛",p:"I · krawl · on · thee · flor"},
+    {t:"I tiptoe quietly.",e:"🤫",p:"I · tip-toh · kwye-et-lee"}
+  );
+})();
+
+
+// ---- EXTRA SENTENCES (injected) ----
+(function addMore(){
+  const push = (ci, gi, arr) => { if(CATS[ci]&&CATS[ci].groups[gi]) CATS[ci].groups[gi].s.push(...arr); };
+  push(8,0,[
+    {t:"I see many colours.",e:"🌈",p:"I · see · men-ee · kul-erz"},
+    {t:"My favourite colour is blue.",e:"💙",p:"my · fay-vrit · kul-er · iz · bloo"}
+  ]);
+  push(9,0,[
+    {t:"I count on my fingers.",e:"🖐️",p:"I · kownt · on · my · fing-gerz"},
+    {t:"Ten is a big number.",e:"🔟",p:"ten · iz · uh · big · num-ber"},
+    {t:"I love counting!",e:"🔢",p:"I · luv · kown-ting"},
+    {t:"One plus one is two.",e:"➕",p:"wun · plus · wun · iz · too"},
+    {t:"Two plus two is four.",e:"➕",p:"too · plus · too · iz · for"}
+  ]);
+  push(11,0,[
+    {t:"It is a nice breezy day.",e:"🌬️",p:"it · iz · uh · nys · bree-zee · day"},
+    {t:"I love the monsoon.",e:"🌧️",p:"I · luv · thee · mon-soon"},
+    {t:"The sky looks dark before rain.",e:"⛈️",p:"thee · sky · looks · dark · buh-for · rayn"},
+    {t:"Summer is very hot in India.",e:"🌞",p:"sum-er · iz · ver-ee · hot · in · in-dee-uh"},
+    {t:"Winter mornings are chilly.",e:"🧣",p:"win-ter · mor-ningz · ar · chil-ee"}
+  ]);
+  push(12,0,[
+    {t:"I put my shoes at the door.",e:"👟",p:"I · put · my · shooz · at · thee · dor"},
+    {t:"The ceiling fan is on.",e:"🌀",p:"thee · see-ling · fan · iz · on"},
+    {t:"I switch off the lights.",e:"💡",p:"I · swich · of · thee · lyts"},
+    {t:"My room is neat and tidy.",e:"✨",p:"my · room · iz · neet · und · ty-dee"}
+  ]);
+  push(15,0,[
+    {t:"I see an ambulance.",e:"🚑",p:"I · see · un · am-byoo-luns"},
+    {t:"I see a fire engine.",e:"🚒",p:"I · see · uh · fyr · en-jin"},
+    {t:"I see a police car.",e:"🚓",p:"I · see · uh · puh-lees · kar"},
+    {t:"Vehicles take us places.",e:"🗺️",p:"vee-uh-kulz · tayk · us · plays-ez"}
+  ]);
+  push(16,0,[
+    {t:"One hour has sixty minutes.",e:"⏰",p:"wun · ow-er · haz · siks-tee · min-its"},
+    {t:"I wake up at seven.",e:"🌅",p:"I · wayk · up · at · sev-un"},
+    {t:"I sleep at nine.",e:"🌙",p:"I · sleep · at · nyn"},
+    {t:"Time flies when I play.",e:"⏱️",p:"tym · flyz · wen · I · play"}
+  ]);
+  push(18,0,[
+    {t:"The night is quiet.",e:"🌙",p:"thee · nyt · iz · kwye-it"},
+    {t:"I dream of nice things.",e:"💭",p:"I · dreem · ov · nys · things"},
+    {t:"I am not afraid of the dark.",e:"💪",p:"I · am · not · uh-frayd · ov · thee · dark"},
+    {t:"Morning will come soon.",e:"🌅",p:"mor-ning · wil · kum · soon"}
+  ]);
+  push(21,0,[
+    {t:"I visit the museum.",e:"🏛️",p:"I · viz-it · thee · myoo-zee-um"},
+    {t:"I see many old things there.",e:"🏺",p:"I · see · men-ee · old · things · thair"},
+    {t:"The museum is interesting.",e:"🤩",p:"thee · myoo-zee-um · iz · in-tres-ting"}
+  ]);
+  push(23,0,[
+    {t:"I clap to the beat.",e:"👏",p:"I · klap · too · thee · beet"},
+    {t:"Music makes me dance.",e:"🎵",p:"myoo-zik · mayks · mee · dans"},
+    {t:"I love nursery rhymes.",e:"📖",p:"I · luv · ner-ser-ee · rymz"},
+    {t:"Row row row your boat.",e:"⛵",p:"roh · roh · roh · yor · boht"},
+    {t:"Gently down the stream.",e:"🌊",p:"jent-lee · down · thee · streem"},
+    {t:"Merrily merrily life is but a dream.",e:"💭",p:"mer-uh-lee · mer-uh-lee · lyf · iz · but · uh · dreem"}
+  ]);
+  push(24,0,[
+    {t:"Where do birds go at night?",e:"🐦",p:"wair · doo · berdz · go · at · nyt"},
+    {t:"What do fish eat?",e:"🐟",p:"wot · doo · fish · eet"},
+    {t:"Why is the sky blue?",e:"🔵",p:"wy · iz · thee · sky · bloo"},
+    {t:"How do aeroplanes fly?",e:"✈️",p:"how · doo · air-oh-playnz · fly"},
+    {t:"Who made the world?",e:"🌍",p:"hoo · mayd · thee · werld"},
+    {t:"What is inside a cloud?",e:"☁️",p:"wot · iz · in-syd · uh · klowd"}
+  ]);
+  push(25,0,[
+    {t:"I cut my birthday cake.",e:"🔪🎂",p:"I · kut · my · berth-day · kayk"},
+    {t:"All my family is here.",e:"👨‍👩‍👦",p:"awl · my · fam-uh-lee · iz · heer"},
+    {t:"My friends sing for me.",e:"🎵",p:"my · frendz · sing · for · mee"},
+    {t:"I feel so special today.",e:"⭐",p:"I · feel · so · spesh-ul · too-day"},
+    {t:"Birthday comes once a year.",e:"📅",p:"berth-day · kumz · wuns · uh · yeer"}
+  ]);
+  push(27,0,[
+    {t:"Planets go around the sun.",e:"🌍",p:"plan-its · go · uh-rownd · thee · sun"},
+    {t:"The moon has no air.",e:"🌕",p:"thee · moon · haz · no · air"},
+    {t:"Stars are very very far.",e:"⭐",p:"starz · ar · ver-ee · ver-ee · far"},
+    {t:"I look through a telescope.",e:"🔭",p:"I · look · throo · uh · tel-uh-skohp"}
+  ]);
+  push(32,0,[
+    {t:"I see a starfish.",e:"⭐",p:"I · see · uh · star-fish"},
+    {t:"The sea is very deep.",e:"🌊",p:"thee · see · iz · ver-ee · deep"},
+    {t:"Sand is between my toes.",e:"🦶",p:"sand · iz · buh-tween · my · tohz"},
+    {t:"I watch the sunset.",e:"🌅",p:"I · woch · thee · sun-set"}
+  ]);
+  push(35,0,[
+    {t:"I see a snail.",e:"🐌",p:"I · see · uh · snayl"},
+    {t:"I see a ladybird.",e:"🐞",p:"I · see · uh · lay-dee-berd"},
+    {t:"The garden has many insects.",e:"🐛",p:"thee · gar-den · haz · men-ee · in-sekts"},
+    {t:"I count the flowers.",e:"🌸",p:"I · kownt · thee · flow-erz"},
+    {t:"The rose smells sweet.",e:"🌹",p:"thee · rohz · smelz · sweet"},
+    {t:"I water the plants with papa.",e:"🌿",p:"I · waw-ter · thee · plants · with · pah-pah"}
+  ]);
+  push(36,0,[
+    {t:"I watch educational videos.",e:"📺",p:"I · woch · ej-oo-kay-shun-ul · vid-ee-ohz"},
+    {t:"Technology helps us learn.",e:"💡",p:"tek-nol-uh-jee · helpz · us · lern"},
+    {t:"I learn new things every day.",e:"🧠",p:"I · lern · nyoo · things · ev-ree · day"}
+  ]);
+  push(37,0,[
+    {t:"The nurse is very kind.",e:"👩‍⚕️",p:"thee · ners · iz · ver-ee · kynd"},
+    {t:"I am brave at the doctor.",e:"💪",p:"I · am · brayv · at · thee · dok-ter"},
+    {t:"Medicines help me get better.",e:"💊",p:"med-uh-sunz · help · mee · get · bet-er"},
+    {t:"I wash my hands to stay healthy.",e:"🧼",p:"I · wash · my · handz · too · stay · hel-thee"}
+  ]);
+  push(43,0,[
+    {t:"I am grateful for my family.",e:"👨‍👩‍👦",p:"I · am · grayt-ful · for · my · fam-uh-lee"},
+    {t:"I am grateful for my food.",e:"🍽️",p:"I · am · grayt-ful · for · my · food"},
+    {t:"Good deeds make God happy.",e:"✨",p:"good · deedz · mayk · god · hap-ee"},
+    {t:"I will be honest.",e:"💛",p:"I · wil · bee · on-ist"}
+  ]);
+  push(49,0,[
+    {t:"My favourite time is bedtime story.",e:"📖",p:"my · fay-vrit · tym · iz · bed-tym · stor-ee"},
+    {t:"My favourite sport is running.",e:"🏃",p:"my · fay-vrit · sport · iz · run-ing"},
+    {t:"I love my life!",e:"🌟",p:"I · luv · my · lyf"}
+  ]);
+})();
+
+// ============================================================
+//  PALETTE — cycle for stable colours
+// ============================================================
+const PALETTE=['#FF6347','#32CD32','#FF69B4','#FFD700','#FFA500',
+'#9B59B6','#8B4513','#E74C3C','#E91E63','#2196F3','#009688',
+'#03A9F4','#795548','#FF9800','#4CAF50','#607D8B','#9C27B0',
+'#F44336','#3F51B5','#00BCD4','#FF5722','#1ABC9C','#FF9800',
+'#E91E63','#FF4081','#00897B','#1A237E','#8BC34A','#F57F17',
+'#26C6DA','#AB47BC','#0288D1','#F44336','#78909C','#CDDC39',
+'#455A64','#00ACC1','#7B1FA2','#2E7D32','#F57C00','#E040FB',
+'#BF360C','#5C6BC0','#D32F2F','#00695C','#558B2F','#F4511E',
+'#0277BD','#AD1457'];
+
+// ============================================================
+//  STATE
+// ============================================================
+let activeIdx = 0;
+let speechRate = 0.55;
+let voiceGender = 'female';
+let stars = 0;
+const playedKeys = new Set();
+let searchMode = false;
+let searchResults = [];
+
+// ============================================================
+//  STARFIELD
+// ============================================================
+(function buildStarfield(){
+  const sf = document.getElementById('starfield');
+  for(let i=0;i<120;i++){
+    const d=document.createElement('div');
+    d.className='star-dot';
+    const sz=1+Math.random()*3;
+    d.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;animation-duration:${2+Math.random()*4}s;animation-delay:${Math.random()*4}s;`;
+    sf.appendChild(d);
+  }
+})();
+
+// ============================================================
+//  SPEED BUTTONS
+// ============================================================
+document.querySelectorAll('[data-rate]').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('[data-rate]').forEach(b=>b.classList.remove('sel'));
+    btn.classList.add('sel');
+    speechRate=parseFloat(btn.dataset.rate);
+  });
+});
+
+// ============================================================
+//  VOICE GENDER BUTTONS
+// ============================================================
+document.querySelectorAll('[data-gender]').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('[data-gender]').forEach(b=>b.classList.remove('sel'));
+    btn.classList.add('sel');
+    voiceGender=btn.dataset.gender;
+  });
+});
+
+// ============================================================
+//  STAR PIPS (10 pips, light up per star)
+// ============================================================
+(function buildPips(){
+  const c=document.getElementById('starPips');
+  for(let i=0;i<10;i++){
+    const p=document.createElement('div');
+    p.className='star-pip';p.id='pip'+i;
+    c.appendChild(p);
+  }
+})();
+function updatePips(){
+  for(let i=0;i<10;i++){
+    document.getElementById('pip'+i).classList.toggle('lit',i<(stars%10));
+  }
+}
+
+// ============================================================
+//  TABS
+// ============================================================
+function buildTabs(){
+  const ts=document.getElementById('tabsScroll');
+  ts.innerHTML='';
+  CATS.forEach((cat,i)=>{
+    const btn=document.createElement('button');
+    btn.className='tab-btn'+(i===activeIdx?' active':'');
+    btn.textContent=cat.label;
+    btn.style.background=i===activeIdx?PALETTE[i%PALETTE.length]:'rgba(255,255,255,0.1)';
+    btn.style.color=i===activeIdx?'#000':'rgba(255,255,255,0.75)';
+    btn.addEventListener('click',()=>switchCat(i));
+    ts.appendChild(btn);
+  });
+}
+
+function switchCat(i){
+  searchMode=false;
+  document.getElementById('searchBox').value='';
+  activeIdx=i;
+  buildTabs();
+  buildStage();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ============================================================
+//  STAGE
+// ============================================================
+function buildStage(){
+  const stage=document.getElementById('stage');
+  stage.innerHTML='';
+
+  if(searchMode){
+    const h=document.createElement('div');
+    h.className='search-results-title';
+    h.textContent=`🔍 Found ${searchResults.length} sentences`;
+    stage.appendChild(h);
+    if(searchResults.length===0){
+      const m=document.createElement('div');
+      m.style.cssText='text-align:center;color:rgba(255,255,255,0.4);font-size:1.2rem;padding:40px;';
+      m.textContent='No sentences found. Try a different word!';
+      stage.appendChild(m);
+      return;
+    }
+    const grid=document.createElement('div');
+    grid.className='sentence-grid';
+    searchResults.forEach((item,idx)=>{
+      grid.appendChild(buildCard(item.s,item.catIdx,idx*60));
+    });
+    stage.appendChild(grid);
+    return;
+  }
+
+  const cat=CATS[activeIdx];
+  const color=PALETTE[activeIdx%PALETTE.length];
+
+  const title=document.createElement('div');
+  title.className='cat-title';
+  title.style.color=color;
+  title.textContent=cat.label;
+  stage.appendChild(title);
+
+  let delay=0;
+  cat.groups.forEach(grp=>{
+    if(grp.h){
+      const lbl=document.createElement('div');
+      lbl.className='group-label';
+      lbl.textContent=grp.h;
+      stage.appendChild(lbl);
+    }
+    const grid=document.createElement('div');
+    grid.className='sentence-grid';
+    grp.s.forEach(s=>{
+      grid.appendChild(buildCard(s,activeIdx,delay));
+      delay+=55;
+    });
+    stage.appendChild(grid);
+  });
+}
+
+function buildCard(s,catIdx,delay){
+  const color=PALETTE[catIdx%PALETTE.length];
+  const bg=CATS[catIdx]?CATS[catIdx].bg:'rgba(255,255,255,0.1)';
+  const key=catIdx+'-'+s.t;
+
+  const card=document.createElement('div');
+  card.className='sentence-card'+(playedKeys.has(key)?' played':'');
+  card.style.cssText=`background:${bg};animation-delay:${delay}ms;`;
+
+  card.innerHTML=`
+    <div class="card-emoji">${s.e||'⭐'}</div>
+    <div class="card-body">
+      <div class="card-sentence">${s.t}</div>
+      <div class="card-pronun">🗣 ${s.p||''}</div>
+    </div>
+    <button class="speak-btn" style="background:${color};" title="Listen!">🔊</button>
+  `;
+
+  const btn=card.querySelector('.speak-btn');
+  const speak=()=>speakSentence(s.t,btn,key,card);
+  btn.addEventListener('click',e=>{e.stopPropagation();speak();});
+  card.addEventListener('click',speak);
+  return card;
+}
+
+// ============================================================
+//  SPEECH — very slow for Indian kids
+// ============================================================
+let currentBtn=null;
+function speakSentence(text,btn,key,card){
+  if(!window.speechSynthesis){alert('Please use Chrome browser for audio!');return;}
+  window.speechSynthesis.cancel();
+  if(currentBtn){currentBtn.classList.remove('speaking');}
+
+  const utter=new SpeechSynthesisUtterance(text);
+  utter.lang='en-IN';
+  utter.rate=speechRate;
+  utter.pitch=voiceGender==='female'?1.2:0.85;
+  utter.volume=1;
+
+  const FEMALE_NAMES=['samantha','victoria','karen','moira','tessa','veena','raveena',
+    'zira','hazel','susan','fiona','allison','ava','serena','google us english'];
+  const MALE_NAMES=['alex','tom','daniel','lee','fred','jorge','thomas','david',
+    'mark','james','google uk english male'];
+
+  function isFemaleLike(v){
+    const n=v.name.toLowerCase();
+    return /female/i.test(n)||FEMALE_NAMES.some(k=>n.includes(k));
+  }
+  function isMaleLike(v){
+    const n=v.name.toLowerCase();
+    return /\bmale\b/i.test(n)||MALE_NAMES.some(k=>n.includes(k));
+  }
+
+  function trySpeak(){
+    const voices=window.speechSynthesis.getVoices();
+    const en=voices.filter(v=>v.lang.startsWith('en'));
+    let v;
+    if(voiceGender==='female'){
+      v=en.find(isFemaleLike)
+        ||voices.find(v=>v.lang==='en-IN')
+        ||voices.find(v=>v.lang.startsWith('en-IN'))
+        ||en[0];
+    } else {
+      v=en.find(isMaleLike)
+        ||voices.find(v=>v.lang.startsWith('en-GB')&&!isFemaleLike(v))
+        ||voices.find(v=>v.lang.startsWith('en')&&!isFemaleLike(v))
+        ||en[0];
+    }
+    if(v)utter.voice=v;
+    window.speechSynthesis.speak(utter);
+  }
+
+  btn.classList.add('speaking');
+  currentBtn=btn;
+
+  utter.onend=()=>{
+    btn.classList.remove('speaking');
+    currentBtn=null;
+    if(!playedKeys.has(key)){
+      playedKeys.add(key);
+      card.classList.add('played');
+      stars++;
+      document.getElementById('starCount').textContent=stars;
+      updatePips();
+      spawnConfetti(btn);
+      if(stars>0&&stars%10===0)showBravo();
+    }
+  };
+  utter.onerror=()=>{btn.classList.remove('speaking');currentBtn=null;};
+
+  // Voices may not be ready
+  if(window.speechSynthesis.getVoices().length>0){trySpeak();}
+  else{window.speechSynthesis.onvoiceschanged=()=>{trySpeak();};}
+}
+
+// ============================================================
+//  CONFETTI
+// ============================================================
+const CONFETTI=['⭐','🌟','✨','🎉','💫','🌈','❤️','🎊'];
+function spawnConfetti(btn){
+  const r=btn.getBoundingClientRect();
+  const cx=r.left+r.width/2;const cy=r.top+r.height/2;
+  for(let i=0;i<5;i++){
+    const el=document.createElement('div');
+    el.className='confetti-piece';
+    el.textContent=CONFETTI[Math.floor(Math.random()*CONFETTI.length)];
+    el.style.cssText=`left:${cx+(Math.random()-0.5)*60}px;top:${cy}px;animation-delay:${i*80}ms;font-size:${1.4+Math.random()}rem;`;
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),1800);
+  }
+}
+
+// ============================================================
+//  BRAVO
+// ============================================================
+const BRAVOS=['🌟 Shabash!','🎉 Waah!','💫 Amazing!','🏆 Superstar!','🎊 Brilliant!','⭐ You Rock!','🌈 Fantastic!'];
+function showBravo(){
+  const ov=document.createElement('div');ov.className='bravo-overlay';
+  const bx=document.createElement('div');bx.className='bravo-box';
+  bx.textContent=BRAVOS[Math.floor(Math.random()*BRAVOS.length)];
+  ov.appendChild(bx);document.body.appendChild(ov);
+  setTimeout(()=>ov.remove(),2800);
+}
+
+// ============================================================
+//  SEARCH
+// ============================================================
+document.getElementById('searchBox').addEventListener('input',function(){
+  const q=this.value.trim().toLowerCase();
+  if(!q){searchMode=false;buildTabs();buildStage();return;}
+  searchMode=true;
+  searchResults=[];
+  CATS.forEach((cat,ci)=>{
+    cat.groups.forEach(grp=>{
+      grp.s.forEach(s=>{
+        if(s.t.toLowerCase().includes(q)||s.p.toLowerCase().includes(q)){
+          searchResults.push({s,catIdx:ci});
+        }
+      });
+    });
+  });
+  buildStage();
+});
+
+// ============================================================
+//  SCROLL TOP
+// ============================================================
+const scrollTopBtn=document.getElementById('scrollTop');
+window.addEventListener('scroll',()=>{
+  scrollTopBtn.classList.toggle('visible',window.scrollY>300);
+});
+scrollTopBtn.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+// ============================================================
+//  INIT
+// ============================================================
+window.speechSynthesis.getVoices();
+buildTabs();
+buildStage();
+updatePips();
+</script>
+</body>
+</html>
